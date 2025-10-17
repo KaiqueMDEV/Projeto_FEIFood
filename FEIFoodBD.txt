@@ -1,0 +1,119 @@
+-- =============================================================================
+-- Script SQL completo para criação e população do banco de dados FEIFood
+-- Projeto da Disciplina: CCM310
+-- Gerado em: 17/10/2025
+-- =============================================================================
+
+
+-- SEÇÃO 1: REMOÇÃO DAS TABELAS (PARA GARANTIR UM AMBIENTE LIMPO)
+-- A ordem de remoção é a inversa da de criação para respeitar as chaves estrangeiras.
+DROP TABLE IF EXISTS pedido_alimento;
+DROP TABLE IF EXISTS pedido;
+DROP TABLE IF EXISTS alimento;
+DROP TABLE IF EXISTS usuario;
+
+
+-- SEÇÃO 2: CRIAÇÃO DAS TABELAS (ESTRUTURA DO BANCO DE DADOS)
+
+-- Tabela para os Usuários
+CREATE TABLE usuario (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    cpf VARCHAR(14) UNIQUE NOT NULL,
+    usuario VARCHAR(50) NOT NULL,
+    senha VARCHAR(50) NOT NULL
+);
+
+-- Tabela para os Alimentos
+CREATE TABLE alimento (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    valor DECIMAL(10, 2) NOT NULL,
+    descricao TEXT,
+    tipo_alimento VARCHAR(10) NOT NULL,
+    gramas INT,
+    veggie BOOLEAN,
+    categoria_comida VARCHAR(50),
+    ml INT,
+    zero_sugar BOOLEAN,
+    tipo_bebida VARCHAR(50),
+    sabor VARCHAR(50),
+    teor_alcoolico DECIMAL(4, 2)
+);
+
+-- Tabela para os Pedidos
+CREATE TABLE pedido (
+    id SERIAL PRIMARY KEY,
+    data_hora TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    valor_total DECIMAL(10, 2),
+    avaliacao INT,
+    usuario_id INT NOT NULL,
+    CONSTRAINT fk_usuario
+        FOREIGN KEY(usuario_id) 
+        REFERENCES usuario(id)
+);
+
+-- Tabela de Junção: Itens do Pedido
+CREATE TABLE pedido_alimento (
+    pedido_id INT NOT NULL,
+    alimento_id INT NOT NULL,
+    quantidade INT NOT NULL DEFAULT 1,
+    CONSTRAINT fk_pedido FOREIGN KEY(pedido_id) REFERENCES pedido(id),
+    CONSTRAINT fk_alimento FOREIGN KEY(alimento_id) REFERENCES alimento(id),
+    PRIMARY KEY (pedido_id, alimento_id)
+);
+
+
+-- SEÇÃO 3: POPULAÇÃO DAS TABELAS (DADOS INICIAIS)
+
+-- Inserindo o cardápio na tabela 'alimento'
+INSERT INTO alimento (nome, valor, descricao, tipo_alimento, gramas, veggie, categoria_comida, ml, zero_sugar, tipo_bebida, sabor, teor_alcoolico) VALUES
+-- Pizzas
+('Pizza de Calabresa', 45.50, 'Molho de tomate fresco, queijo mussarela, calabresa fatiada e orégano.', 'COMIDA', 750, false, 'PIZZA', NULL, NULL, NULL, NULL, NULL),
+('Pizza Quatro Queijos', 52.00, 'Molho de tomate, queijos mussarela, provolone, parmesão e gorgonzola.', 'COMIDA', 780, true, 'PIZZA', NULL, NULL, NULL, NULL, NULL),
+('Pizza de Frango com Catupiry', 49.90, 'Molho de tomate, queijo mussarela, frango desfiado e catupiry cremoso.', 'COMIDA', 800, false, 'PIZZA', NULL, NULL, NULL, NULL, NULL),
+('Pizza Portuguesa', 55.00, 'Molho, mussarela, presunto, ovo, cebola, pimentão e azeitonas.', 'COMIDA', 820, false, 'PIZZA', NULL, NULL, NULL, NULL, NULL),
+('Pizza de Brócolis com Alho', 48.00, 'Mussarela, brócolis ao alho e óleo e azeitonas pretas.', 'COMIDA', 760, true, 'PIZZA', NULL, NULL, NULL, NULL, NULL),
+-- Lanches
+('X-Burger', 28.50, 'Pão, hambúrguer de 150g, queijo prato e maionese da casa.', 'COMIDA', 380, false, 'LANCHE', NULL, NULL, NULL, NULL, NULL),
+('X-Frango', 28.50, 'Pão, hambúrguer de frango empanado de 150g, queijo cheddar e maionese da casa.', 'COMIDA', 380, false, 'LANCHE', NULL, NULL, NULL, NULL, NULL),
+('X-Salada', 32.00, 'Pão, hambúrguer de 150g, queijo, alface, tomate, milho e batata palha.', 'COMIDA', 450, false, 'LANCHE', NULL, NULL, NULL, NULL, NULL),
+('X-Bacon Duplo', 38.90, 'Pão, dois hambúrgueres de 150g, dobro de queijo e bacon crocante.', 'COMIDA', 550, false, 'LANCHE', NULL, NULL, NULL, NULL, NULL),
+('Burger Vegetariano', 35.00, 'Pão integral, hambúrguer de grão de bico, queijo, alface e tomate seco.', 'COMIDA', 390, true, 'LANCHE', NULL, NULL, NULL, NULL, NULL),
+-- Acompanhamentos
+('Batata Frita Pequena', 10.00, 'Porção de 150g de batatas fritas crocantes e sequinhas.', 'COMIDA', 150, true, 'ACOMPANHAMENTO', NULL, NULL, NULL, NULL, NULL),
+('Batata Frita Média', 12.00, 'Porção de 300g de batatas fritas crocantes e sequinhas.', 'COMIDA', 300, true, 'ACOMPANHAMENTO', NULL, NULL, NULL, NULL, NULL),
+('Batata Frita Grande', 15.00, 'Porção de 450g de batatas fritas crocantes e sequinhas.', 'COMIDA', 450, true, 'ACOMPANHAMENTO', NULL, NULL, NULL, NULL, NULL),
+('Nuggets de Frango', 18.50, 'Porção com 10 unidades de nuggets e molho agridoce.', 'COMIDA', 250, false, 'ACOMPANHAMENTO', NULL, NULL, NULL, NULL, NULL),
+('Anéis de Cebola', 17.00, 'Porção de 250g de anéis de cebola empanados e fritos.', 'COMIDA', 250, true, 'ACOMPANHAMENTO', NULL, NULL, NULL, NULL, NULL),
+-- Sobremesas
+('Pudim de Leite', 12.00, 'Fatia generosa de pudim de leite condensado com calda de caramelo.', 'COMIDA', 150, true, 'SOBREMESA', NULL, NULL, NULL, NULL, NULL),
+('Mousse de Chocolate', 14.00, 'Mousse de chocolate meio amargo com raspas de chocolate.', 'COMIDA', 130, true, 'SOBREMESA', NULL, NULL, NULL, NULL, NULL),
+('Petit Gateau', 22.00, 'Bolinho quente de chocolate com interior cremoso e bola de sorvete de creme.', 'COMIDA', 200, true, 'SOBREMESA', NULL, NULL, NULL, NULL, NULL),
+('Torta Holandesa', 16.50, 'Fatia de torta com base de biscoito, creme holandês e cobertura de chocolate.', 'COMIDA', 180, true, 'SOBREMESA', NULL, NULL, NULL, NULL, NULL),
+('Açaí na Tigela 300ml', 19.00, 'Açaí batido com banana, servido com granola e leite em pó.', 'COMIDA', 350, true, 'SOBREMESA', NULL, NULL, NULL, NULL, NULL),
+-- Bebidas
+('Coca-Cola', 7.00, 'Lata 350ml.', 'BEBIDA', NULL, NULL, NULL, 350, false, 'REFRIGERANTE', 'Original', NULL),
+('Coca-Cola Zero', 7.00, 'Lata 350ml.', 'BEBIDA', NULL, NULL, NULL, 350, true, 'REFRIGERANTE', 'Zero Açúcar', NULL),
+('Guaraná Antarctica', 7.00, 'Lata 350ml.', 'BEBIDA', NULL, NULL, NULL, 350, false, 'REFRIGERANTE', 'Original', NULL),
+('Suco de Laranja Natural', 9.00, 'Copo de 500ml feito na hora.', 'BEBIDA', NULL, NULL, NULL, 500, false, 'SUCO', 'Laranja', NULL),
+('Suco de Abacaxi com Hortelã', 9.50, 'Copo de 500ml feito na hora.', 'BEBIDA', NULL, NULL, NULL, 500, false, 'SUCO', 'Abacaxi com Hortelã', NULL),
+('Milkshake de Morango', 18.00, 'Copo de 400ml com sorvete de morango e calda.', 'BEBIDA', NULL, NULL, NULL, 400, false, 'MILKSHAKE', 'Morango', NULL),
+('Milkshake de Chocolate', 18.00, 'Copo de 400ml com sorvete de chocolate e calda.', 'BEBIDA', NULL, NULL, NULL, 400, false, 'MILKSHAKE', 'Chocolate', NULL),
+('Milkshake de Baunilha', 16.00, 'Copo de 400ml com sorvete de baunilha', 'BEBIDA', NULL, NULL, NULL, 400, false, 'MILKSHAKE', 'Baunilha', NULL),
+('Água Mineral com Gás', 5.00, 'Garrafa 500ml.', 'BEBIDA', NULL, NULL, NULL, 500, false, NULL, NULL, NULL),
+('Cerveja Lager Long Neck', 12.50, 'Garrafa de 355ml.', 'BEBIDA', NULL, NULL, NULL, 355, false, NULL, 'Puro Malte', 4.8);
+
+
+-- Inserindo os usuários de exemplo na tabela 'usuario'
+INSERT INTO usuario (nome, cpf, usuario, senha) VALUES
+('João Silva', '111.222.333-44', 'joao.silva', 'senha123'),
+('Maria Oliveira', '555.666.777-88', 'maria.oliveira', 'xtudo@2025'),
+('Pedro Souza', '999.888.777-66', 'pedro.souza', 'batatafrita');
+
+
+-- Inserindo um pedido de exemplo para o usuário 'João Silva' (id=1)
+INSERT INTO pedido (usuario_id, valor_total, avaliacao) VALUES (1, 59.50, NULL);
+INSERT INTO pedido_alimento (pedido_id, alimento_id, quantidade) VALUES 
+(1, 1, 1),  -- 1x Pizza de Calabresa (id=1)
+(1, 21, 2); -- 2x Coca-Cola (id=21)
