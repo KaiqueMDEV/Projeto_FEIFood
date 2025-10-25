@@ -18,9 +18,9 @@ public class ClienteDAO {
 
     public ResultSet consultar(Cliente usuario) throws SQLException {
         // O SQL busca por um registro que tenha o usuario E a senha informados
-        String sql = "select * from tbalunos where usuario = ? and senha = ?";       
+        String sql = "select * from tbusuarios where username = ? and senha = ?";       
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1, usuario.getUsuario()); // Pega o usuário do objeto
+        statement.setString(1, usuario.getUsername()); // Pega o usuário do objeto
         statement.setString(2, usuario.getSenha());   // Pega a senha do objeto    
         statement.execute();        
         ResultSet resultado = statement.getResultSet();
@@ -30,9 +30,9 @@ public class ClienteDAO {
 
     public void inserir(Cliente usuario) throws SQLException {
         // SQL para inserir os três campos
-        String sql = "insert into tbalunos (nome, usuario, senha) values ('"
+        String sql = "insert into tbusuarios (nome, username, senha) values ('"
                 + usuario.getNome() + " ', ' "
-                + usuario.getUsuario() + " ',' "
+                + usuario.getUsername() + " ',' "
                 + usuario.getSenha() + " ')";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.execute();
@@ -42,11 +42,11 @@ public class ClienteDAO {
 
     public void atualizar(Cliente usuario) throws SQLException {
         // SQL para atualizar a senha com base no nome de usuário
-        String sql = "update tbalunos set senha = ? where usuario = ?";
+        String sql = "update tbusuarios set senha = ? where username= ?";
         
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1, usuario.getSenha());     // A nova senha
-        statement.setString(2, usuario.getUsuario()); // O usuário a ser atualizado
+        statement.setString(2, usuario.getUsername()); // O usuário a ser atualizado
         
         statement.execute();
         conn.close(); // Fecha a conexão
@@ -55,10 +55,10 @@ public class ClienteDAO {
 
     public void remover(Cliente usuario) throws SQLException {
         // SQL para deletar com base no nome de usuário
-        String sql = "delete from tbalunos where usuario = ?";
+        String sql = "delete from tbusuarios where username = ?";
         
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1, usuario.getUsuario()); // O usuário a ser removido
+        statement.setString(1, usuario.getUsername()); // O usuário a ser removido
         
         statement.execute();
         conn.close(); // Fecha a conexão

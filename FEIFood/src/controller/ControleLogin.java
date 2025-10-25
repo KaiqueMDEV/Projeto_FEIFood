@@ -18,7 +18,7 @@ public class ControleLogin {
     private Login tela1; // A tela de login associada
 
     public ControleLogin(Login view) {
-        this.tela1 = tela1;
+        this.tela1 = view;
     }
     
     
@@ -33,9 +33,9 @@ public class ControleLogin {
                 JOptionPane.showMessageDialog(tela1, "Login Feito", "Aviso",
                                               JOptionPane.INFORMATION_MESSAGE);
                 String nome = res.getString("nome");
-                String user = res.getString("user");
+                String username = res.getString("username");
                 String senha = res.getString("senha");
-                Logado tela2 = new Logado(new Cliente(nome, user, senha));
+                Logado tela2 = new Logado(new Cliente(nome, username, senha));
                 tela2.setVisible(true);
                 tela1.setVisible(false);
             }else{
@@ -43,6 +43,7 @@ public class ControleLogin {
             }
         }catch(SQLException e){
             JOptionPane.showMessageDialog(tela1,"Erro de Conexao","Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
     }
 }

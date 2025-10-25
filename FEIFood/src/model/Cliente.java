@@ -9,13 +9,13 @@ package model;
  * @author Micro
  */
 public class Cliente {
-    private String nome,usuario,senha;
+    private String nome,username,senha;
     
     public Cliente(){       
     }
     
-    public Cliente(String nome, String usuario, String senha){
-        this.usuario = usuario;
+    public Cliente(String nome, String username, String senha){
+        this.username = username;
         this.senha = senha;
     }
 
@@ -23,8 +23,8 @@ public class Cliente {
         return nome;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getUsername() {
+        return username;
     }
 
     public String getSenha() {
@@ -35,8 +35,8 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setSenha(String senha) {

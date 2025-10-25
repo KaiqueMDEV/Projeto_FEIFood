@@ -17,6 +17,7 @@ import model.Cliente;
 public class Logado extends javax.swing.JFrame {
     
     private ControleLogado c;
+    private Cliente cliente;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Logado.class.getName());
 
@@ -28,6 +29,8 @@ public class Logado extends javax.swing.JFrame {
         initComponents();
         lblUsuario.setText((cliente.getNome()));
         c = new ControleLogado(this, cliente);
+        this.cliente = cliente;
+        
     }
     
     /**
@@ -140,6 +143,9 @@ public class Logado extends javax.swing.JFrame {
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         // TODO add your handling code here:
+        Perfil perfil = new Perfil(cliente);
+        perfil.setVisible(true);
+        
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed

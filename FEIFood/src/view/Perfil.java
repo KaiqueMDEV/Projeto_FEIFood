@@ -8,20 +8,26 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import model.Cliente;
 
 /**
  *
  * @author Micro
  */
 public class Perfil extends javax.swing.JFrame {
+    private Cliente cliente;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Perfil.class.getName());
 
     /**
      * Creates new form Perfil
      */
-    public Perfil() {
+    public Perfil(Cliente cliente) {
         initComponents();
+        this.cliente = cliente;
+        lblNome.setText(cliente.getNome());
+        lblUsuario.setText(cliente.getUsername());
+        lblSenha.setText(cliente.getSenha());
     }
 
     /**
@@ -60,6 +66,11 @@ public class Perfil extends javax.swing.JFrame {
 
         btnAlterar.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnSair.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnSair.setText("Sair");
@@ -149,7 +160,15 @@ public class Perfil extends javax.swing.JFrame {
 
     private void btnExcluirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirContaActionPerformed
         // TODO add your handling code here:
+        Exclusao exc = new Exclusao(this.cliente);
+        exc.setVisible(true);
     }//GEN-LAST:event_btnExcluirContaActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        // TODO add your handling code here:
+        Alteracao alt = new Alteracao(this.cliente);
+        alt.setVisible(true);
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     /**
      * @param args the command line arguments

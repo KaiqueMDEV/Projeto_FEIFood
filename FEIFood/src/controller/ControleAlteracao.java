@@ -26,7 +26,7 @@ public class ControleAlteracao {
     }
     
     public void atualizar(){
-       String usuario = cliente.getUsuario();
+       String usuario = cliente.getUsername();
        String novaSenha = tela6.getTxtSenhaNova().getText();
        Cliente cliente = new Cliente("",usuario, novaSenha);
        Conexao conexao = new Conexao();
