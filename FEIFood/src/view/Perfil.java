@@ -74,6 +74,11 @@ public class Perfil extends javax.swing.JFrame {
 
         btnSair.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         btnExcluirConta.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         btnExcluirConta.setForeground(new java.awt.Color(255, 51, 0));
@@ -169,6 +174,13 @@ public class Perfil extends javax.swing.JFrame {
         Alteracao alt = new Alteracao(this.cliente);
         alt.setVisible(true);
     }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        Logado logado = new Logado(this.cliente);
+        logado.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments

@@ -45,6 +45,7 @@ public class Cadastro extends javax.swing.JFrame {
         txtSenha = new javax.swing.JTextField();
         lbl15 = new javax.swing.JLabel();
         btnCadastrar = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
 
         lbl13.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         lbl13.setForeground(new java.awt.Color(255, 0, 0));
@@ -84,6 +85,14 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
+        btnSair.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,12 +120,15 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(32, 32, 32))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(btnCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88))
+                .addGap(86, 86, 86))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(lbl13, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                .addComponent(lbl13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -129,9 +141,11 @@ public class Cadastro extends javax.swing.JFrame {
                 .addComponent(lbl15)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(18, 18, 18)
                 .addComponent(btnCadastrar)
-                .addGap(50, 50, 50))
+                .addGap(33, 33, 33)
+                .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -141,6 +155,13 @@ public class Cadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
         c.salvarCliente();
     }//GEN-LAST:event_btnCadastrarActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        Login log = new Login();
+        log.setVisible(true);
+    }//GEN-LAST:event_btnSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +191,7 @@ public class Cadastro extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnSair;
     private javax.swing.JLabel lbl11;
     private javax.swing.JLabel lbl13;
     private javax.swing.JLabel lbl14;

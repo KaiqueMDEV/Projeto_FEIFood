@@ -50,7 +50,6 @@ public class Logado extends javax.swing.JFrame {
         btnSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(450, 470));
 
         lblUsuario.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         lblUsuario.setText("Usuario");
@@ -144,12 +143,14 @@ public class Logado extends javax.swing.JFrame {
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         // TODO add your handling code here:
         Perfil perfil = new Perfil(cliente);
+        this.setVisible(false);
         perfil.setVisible(true);
         
     }//GEN-LAST:event_btnPerfilActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btnSairActionPerformed
 
     /**
