@@ -62,6 +62,8 @@ public class ControleMenu {
                 case "X-Salada" -> "/resources/xsalada_destaque.png";
                 case "X-Frango" -> "/resources/xfrango_destaque.png";
                 case "X-Bacon Duplo" -> "/resources/xbacon_destaque.png";
+                case "Pizza de Calabresa" -> "/resources/pcalabresa_destaque.png";
+                case "Pizza Quatro Queijos" -> "/resources/p4queijos_destaque.png";
                 default -> "";
             }; 
             
