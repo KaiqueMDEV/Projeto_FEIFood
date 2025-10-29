@@ -4,19 +4,33 @@
  */
 package view;
 
+import controller.ControleMenu;
+import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSeparator;
+import javax.swing.JTextArea;
+import model.Cliente;
+
 /**
  *
  * @author Micro
  */
 public class Menu extends javax.swing.JFrame {
+    private ControleMenu c; // Declara o nosso cérebro
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
+    private Cliente cliente;
 
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    public Menu(Cliente cliente) {
         initComponents();
+        this.c = new ControleMenu(this, cliente); // Inicializa o cérebro
+        this.cliente = cliente;
     }
 
     /**
@@ -31,21 +45,27 @@ public class Menu extends javax.swing.JFrame {
         imgBurguer14 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
-        btnVoltar1 = new javax.swing.JButton();
+        btnGerarPedido = new javax.swing.JButton();
         imgBurguer11 = new javax.swing.JLabel();
         imgBurguer12 = new javax.swing.JLabel();
         imgBurguer13 = new javax.swing.JLabel();
         imgBurguer15 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        panelLanche = new javax.swing.JPanel();
-        panelAlimentoDestaque = new javax.swing.JLabel();
-        panelAlimentoTitulo = new javax.swing.JLabel();
+        painelLanche = new javax.swing.JPanel();
+        painelDestaqueAlimento = new javax.swing.JLabel();
+        painelPrecoAlimento = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        painelDescAlimento = new javax.swing.JTextArea();
+        btnAdicionar = new javax.swing.JButton();
+        painelTituloAlimento = new javax.swing.JLabel();
 
         imgBurguer14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/xfrango.png"))); // NOI18N
         imgBurguer14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Frango", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
+        setSize(new java.awt.Dimension(814, 679));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Menu");
@@ -58,17 +78,18 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
-        btnVoltar1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnVoltar1.setText(" Gerar Pedido");
-        btnVoltar1.addActionListener(new java.awt.event.ActionListener() {
+        btnGerarPedido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnGerarPedido.setText(" Gerar Pedido");
+        btnGerarPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btnGerarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVoltar1ActionPerformed(evt);
+                btnGerarPedidoActionPerformed(evt);
             }
         });
 
         imgBurguer11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/xburguer.jpg"))); // NOI18N
         imgBurguer11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Burguer", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
-        imgBurguer11.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        imgBurguer11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         imgBurguer11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 imgBurguer11MouseClicked(evt);
@@ -77,29 +98,75 @@ public class Menu extends javax.swing.JFrame {
 
         imgBurguer12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/xsalada.jpg"))); // NOI18N
         imgBurguer12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Salada", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
-        imgBurguer12.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        imgBurguer12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgBurguer12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgBurguer12MouseClicked(evt);
+            }
+        });
 
         imgBurguer13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/xfrango.png"))); // NOI18N
         imgBurguer13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Frango", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
-        imgBurguer13.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        imgBurguer13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgBurguer13.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgBurguer13MouseClicked(evt);
+            }
+        });
 
         imgBurguer15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/xbacon.png"))); // NOI18N
         imgBurguer15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Bacon", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
-        imgBurguer15.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        imgBurguer15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgBurguer15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgBurguer15MouseClicked(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("LANCHES");
 
-        panelLanche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        panelLanche.setLayout(null);
+        painelLanche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        painelLanche.setLayout(null);
 
-        panelAlimentoDestaque.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        panelLanche.add(panelAlimentoDestaque);
-        panelAlimentoDestaque.setBounds(10, 10, 280, 240);
+        painelDestaqueAlimento.setBackground(new java.awt.Color(255, 255, 255));
+        painelDestaqueAlimento.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        painelLanche.add(painelDestaqueAlimento);
+        painelDestaqueAlimento.setBounds(10, 10, 280, 240);
 
-        panelAlimentoTitulo.setText("jLabel4");
-        panelLanche.add(panelAlimentoTitulo);
-        panelAlimentoTitulo.setBounds(10, 260, 37, 16);
+        painelPrecoAlimento.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        painelPrecoAlimento.setForeground(new java.awt.Color(0, 0, 0));
+        painelLanche.add(painelPrecoAlimento);
+        painelPrecoAlimento.setBounds(10, 290, 280, 40);
+
+        painelDescAlimento.setEditable(false);
+        painelDescAlimento.setColumns(20);
+        painelDescAlimento.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        painelDescAlimento.setForeground(new java.awt.Color(0, 0, 0));
+        painelDescAlimento.setLineWrap(true);
+        painelDescAlimento.setRows(5);
+        painelDescAlimento.setWrapStyleWord(true);
+        painelDescAlimento.setBorder(null);
+        jScrollPane1.setViewportView(painelDescAlimento);
+
+        painelLanche.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 330, 280, 280);
+
+        btnAdicionar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAdicionar.setText("Adicionar");
+        btnAdicionar.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+        painelLanche.add(btnAdicionar);
+        btnAdicionar.setBounds(60, 630, 183, 30);
+
+        painelTituloAlimento.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        painelTituloAlimento.setForeground(new java.awt.Color(0, 0, 0));
+        painelLanche.add(painelTituloAlimento);
+        painelTituloAlimento.setBounds(10, 260, 280, 40);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -111,7 +178,7 @@ public class Menu extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVoltar1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnGerarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,7 +195,7 @@ public class Menu extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(imgBurguer15))))))
                 .addGap(18, 18, 18)
-                .addComponent(panelLanche, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(painelLanche, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -151,8 +218,8 @@ public class Menu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 358, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnVoltar)
-                            .addComponent(btnVoltar1)))
-                    .addComponent(panelLanche, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnGerarPedido)))
+                    .addComponent(painelLanche, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -162,44 +229,67 @@ public class Menu extends javax.swing.JFrame {
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
+        Logado logado = new Logado(this.cliente);
+        logado.setVisible(true);
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void btnVoltar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltar1ActionPerformed
+    private void btnGerarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPedidoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnVoltar1ActionPerformed
+    }//GEN-LAST:event_btnGerarPedidoActionPerformed
 
     private void imgBurguer11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBurguer11MouseClicked
         // TODO add your handling code here:
+        c.exibirDetalhes("X-Burger");
     }//GEN-LAST:event_imgBurguer11MouseClicked
+
+    private void imgBurguer12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBurguer12MouseClicked
+        // TODO add your handling code here:
+        c.exibirDetalhes("X-Salada");
+    }//GEN-LAST:event_imgBurguer12MouseClicked
+
+    private void imgBurguer13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBurguer13MouseClicked
+        // TODO add your handling code here:
+        c.exibirDetalhes("X-Frango");
+    }//GEN-LAST:event_imgBurguer13MouseClicked
+
+    private void imgBurguer15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBurguer15MouseClicked
+        // TODO add your handling code here:
+        c.exibirDetalhes("X-Bacon Duplo");
+    }//GEN-LAST:event_imgBurguer15MouseClicked
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAdicionarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Menu().setVisible(true));
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+//            logger.log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(() -> new Menu().setVisible(true));
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnGerarPedido;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton btnVoltar1;
     private javax.swing.JLabel imgBurguer11;
     private javax.swing.JLabel imgBurguer12;
     private javax.swing.JLabel imgBurguer13;
@@ -207,9 +297,159 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel imgBurguer15;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel panelAlimentoDestaque;
-    private javax.swing.JLabel panelAlimentoTitulo;
-    private javax.swing.JPanel panelLanche;
+    private javax.swing.JTextArea painelDescAlimento;
+    private javax.swing.JLabel painelDestaqueAlimento;
+    private javax.swing.JPanel painelLanche;
+    private javax.swing.JLabel painelPrecoAlimento;
+    private javax.swing.JLabel painelTituloAlimento;
     // End of variables declaration//GEN-END:variables
+
+    public ControleMenu getC() {
+        return c;
+    }
+
+    public void setC(ControleMenu c) {
+        this.c = c;
+    }
+
+    public JButton getBtnAdicionar() {
+        return btnAdicionar;
+    }
+
+    public void setBtnAdicionar(JButton btnAdicionar) {
+        this.btnAdicionar = btnAdicionar;
+    }
+
+    public JButton getBtnGerarPedido() {
+        return btnGerarPedido;
+    }
+
+    public void setBtnGerarPedido(JButton btnGerarPedido) {
+        this.btnGerarPedido = btnGerarPedido;
+    }
+
+    public JButton getBtnVoltar() {
+        return btnVoltar;
+    }
+
+    public void setBtnVoltar(JButton btnVoltar) {
+        this.btnVoltar = btnVoltar;
+    }
+
+    public JLabel getImgBurguer11() {
+        return imgBurguer11;
+    }
+
+    public void setImgBurguer11(JLabel imgBurguer11) {
+        this.imgBurguer11 = imgBurguer11;
+    }
+
+    public JLabel getImgBurguer12() {
+        return imgBurguer12;
+    }
+
+    public void setImgBurguer12(JLabel imgBurguer12) {
+        this.imgBurguer12 = imgBurguer12;
+    }
+
+    public JLabel getImgBurguer13() {
+        return imgBurguer13;
+    }
+
+    public void setImgBurguer13(JLabel imgBurguer13) {
+        this.imgBurguer13 = imgBurguer13;
+    }
+
+    public JLabel getImgBurguer14() {
+        return imgBurguer14;
+    }
+
+    public void setImgBurguer14(JLabel imgBurguer14) {
+        this.imgBurguer14 = imgBurguer14;
+    }
+
+    public JLabel getImgBurguer15() {
+        return imgBurguer15;
+    }
+
+    public void setImgBurguer15(JLabel imgBurguer15) {
+        this.imgBurguer15 = imgBurguer15;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JLabel getjLabel2() {
+        return jLabel2;
+    }
+
+    public void setjLabel2(JLabel jLabel2) {
+        this.jLabel2 = jLabel2;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public void setjScrollPane1(JScrollPane jScrollPane1) {
+        this.jScrollPane1 = jScrollPane1;
+    }
+
+    public JSeparator getjSeparator1() {
+        return jSeparator1;
+    }
+
+    public void setjSeparator1(JSeparator jSeparator1) {
+        this.jSeparator1 = jSeparator1;
+    }
+
+    public JTextArea getPainelDescAlimento() {
+        return painelDescAlimento;
+    }
+
+    public void setPainelDescAlimento(JTextArea painelDescAlimento) {
+        this.painelDescAlimento = painelDescAlimento;
+    }
+
+    public JLabel getPainelDestaqueAlimento() {
+        return painelDestaqueAlimento;
+    }
+
+    public void setPainelDestaqueAlimento(JLabel painelDestaqueAlimento) {
+        this.painelDestaqueAlimento = painelDestaqueAlimento;
+    }
+
+    public JPanel getPainelLanche() {
+        return painelLanche;
+    }
+
+    public void setPainelLanche(JPanel painelLanche) {
+        this.painelLanche = painelLanche;
+    }
+
+    public JLabel getPainelPrecoAlimento() {
+        return painelPrecoAlimento;
+    }
+
+    public void setPainelPrecoAlimento(JLabel painelPrecoAlimento) {
+        this.painelPrecoAlimento = painelPrecoAlimento;
+    }
+
+    public JLabel getPainelTituloAlimento() {
+        return painelTituloAlimento;
+    }
+
+    public void setPainelTituloAlimento(JLabel painelTituloAlimento) {
+        this.painelTituloAlimento = painelTituloAlimento;
+    }
+
+    
+    
 }

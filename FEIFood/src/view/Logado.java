@@ -134,6 +134,9 @@ public class Logado extends javax.swing.JFrame {
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         // TODO add your handling code here:
+        Menu menu = new Menu(cliente);
+        this.setVisible(false);
+        menu.setVisible(true);
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
