@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import model.Cliente;
+import java.awt.Color;
 
 /**
  *
@@ -20,6 +21,7 @@ import model.Cliente;
  */
 public class Menu extends javax.swing.JFrame {
     private ControleMenu c; // Declara o nosso cérebro
+    
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
     private Cliente cliente;
@@ -31,6 +33,7 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         this.c = new ControleMenu(this, cliente); // Inicializa o cérebro
         this.cliente = cliente;
+        //this.getContentPane().setBackground(Color.getHSBColor(60,100,74));
     }
 
     /**
@@ -64,13 +67,18 @@ public class Menu extends javax.swing.JFrame {
         imgBurguer14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Frango", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("cardapio");
+        setBackground(new java.awt.Color(234, 168, 0));
+        setForeground(new java.awt.Color(255, 102, 51));
         setResizable(false);
         setSize(new java.awt.Dimension(814, 679));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setText("Menu");
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Cardápio");
 
         btnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,6 +87,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         btnGerarPedido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnGerarPedido.setForeground(new java.awt.Color(255, 255, 255));
         btnGerarPedido.setText(" Gerar Pedido");
         btnGerarPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnGerarPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +96,8 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        imgBurguer11.setBackground(new java.awt.Color(255, 204, 0));
+        imgBurguer11.setForeground(new java.awt.Color(255, 255, 255));
         imgBurguer11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/xburguer.jpg"))); // NOI18N
         imgBurguer11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Burguer", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
         imgBurguer11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -96,6 +107,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        imgBurguer12.setForeground(new java.awt.Color(255, 255, 255));
         imgBurguer12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/xsalada.jpg"))); // NOI18N
         imgBurguer12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Salada", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
         imgBurguer12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -105,6 +117,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        imgBurguer13.setForeground(new java.awt.Color(255, 255, 255));
         imgBurguer13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/xfrango.png"))); // NOI18N
         imgBurguer13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Frango", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
         imgBurguer13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -114,6 +127,7 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        imgBurguer15.setForeground(new java.awt.Color(255, 255, 255));
         imgBurguer15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/xbacon.png"))); // NOI18N
         imgBurguer15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Bacon", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
         imgBurguer15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -124,6 +138,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("LANCHES");
 
         painelLanche.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -153,6 +168,7 @@ public class Menu extends javax.swing.JFrame {
         jScrollPane1.setBounds(10, 330, 280, 280);
 
         btnAdicionar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnAdicionar.setForeground(new java.awt.Color(255, 255, 255));
         btnAdicionar.setText("Adicionar");
         btnAdicionar.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {

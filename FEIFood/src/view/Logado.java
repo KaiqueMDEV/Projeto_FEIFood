@@ -58,7 +58,7 @@ public class Logado extends javax.swing.JFrame {
         jLabel1.setText("Bem vindo(a) ao FEIFood!");
 
         btnMenu.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        btnMenu.setText("Menu");
+        btnMenu.setText("Cardápio");
         btnMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuActionPerformed(evt);
