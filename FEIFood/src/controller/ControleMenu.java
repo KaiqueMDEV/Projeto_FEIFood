@@ -64,6 +64,9 @@ public class ControleMenu {
                 case "X-Bacon Duplo" -> "/resources/xbacon_destaque.png";
                 case "Pizza de Calabresa" -> "/resources/pcalabresa_destaque.png";
                 case "Pizza Quatro Queijos" -> "/resources/p4queijos_destaque.png";
+                case "Pizza de Frango com Catupiry" -> "/resources/fcatupiry_destaque.png";
+                case "Pizza Portuguesa" -> "/resources/portuguesa_destaque.png";
+                case "Pizza de Brócolis com Alho" -> "/resources/brocolis_destaque.png";
                 default -> "";
             }; 
             

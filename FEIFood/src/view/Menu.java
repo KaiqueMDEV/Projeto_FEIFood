@@ -65,6 +65,7 @@ public class Menu extends javax.swing.JFrame {
         imgPizza13 = new javax.swing.JLabel();
         imgPizza14 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        imgPizza15 = new javax.swing.JLabel();
 
         imgBurguer14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/xfrango.png"))); // NOI18N
         imgBurguer14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Frango", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
@@ -131,7 +132,7 @@ public class Menu extends javax.swing.JFrame {
 
         imgBurguer15.setForeground(new java.awt.Color(255, 255, 255));
         imgBurguer15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/xbacon.png"))); // NOI18N
-        imgBurguer15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Bacon", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
+        imgBurguer15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Bacon Duplo", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
         imgBurguer15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         imgBurguer15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -187,10 +188,10 @@ public class Menu extends javax.swing.JFrame {
         painelTituloAlimento.setBounds(10, 260, 280, 40);
 
         imgPizza11.setBackground(new java.awt.Color(255, 204, 0));
-        imgPizza11.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        imgPizza11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         imgPizza11.setForeground(new java.awt.Color(255, 255, 255));
         imgPizza11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pcalabresa.png"))); // NOI18N
-        imgPizza11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Calabresa", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+        imgPizza11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Calabresa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
         imgPizza11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         imgPizza11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -202,7 +203,7 @@ public class Menu extends javax.swing.JFrame {
         imgPizza12.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         imgPizza12.setForeground(new java.awt.Color(255, 255, 255));
         imgPizza12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/p4queijos.png"))); // NOI18N
-        imgPizza12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quatro Queijos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+        imgPizza12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quatro Queijos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
         imgPizza12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         imgPizza12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -225,8 +226,8 @@ public class Menu extends javax.swing.JFrame {
         imgPizza14.setBackground(new java.awt.Color(255, 204, 0));
         imgPizza14.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         imgPizza14.setForeground(new java.awt.Color(255, 255, 255));
-        imgPizza14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pcalabresa.png"))); // NOI18N
-        imgPizza14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pizza 4 Queijos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+        imgPizza14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pportuguesa.png"))); // NOI18N
+        imgPizza14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Portuguesa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
         imgPizza14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         imgPizza14.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -237,6 +238,18 @@ public class Menu extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("PIZZAS");
+
+        imgPizza15.setBackground(new java.awt.Color(255, 204, 0));
+        imgPizza15.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        imgPizza15.setForeground(new java.awt.Color(255, 255, 255));
+        imgPizza15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pcalabresa.png"))); // NOI18N
+        imgPizza15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Brócolis & Alho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
+        imgPizza15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgPizza15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgPizza15MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -271,7 +284,8 @@ public class Menu extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(imgPizza13)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(imgPizza14)))))
+                                .addComponent(imgPizza14))
+                            .addComponent(imgPizza15))))
                 .addGap(18, 18, 18)
                 .addComponent(painelLanche, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
@@ -299,11 +313,13 @@ public class Menu extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(imgPizza12)
-                            .addComponent(imgPizza11)
-                            .addComponent(imgPizza13)
-                            .addComponent(imgPizza14))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(imgPizza14, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(imgPizza13, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(imgPizza12, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(imgPizza11, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(9, 9, 9)
+                        .addComponent(imgPizza15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnVoltar)
@@ -360,11 +376,18 @@ public class Menu extends javax.swing.JFrame {
 
     private void imgPizza13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgPizza13MouseClicked
         // TODO add your handling code here:
+        c.exibirDetalhes("Pizza de Frango com Catupiry");
     }//GEN-LAST:event_imgPizza13MouseClicked
 
     private void imgPizza14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgPizza14MouseClicked
         // TODO add your handling code here:
+        c.exibirDetalhes("Pizza Portuguesa");
     }//GEN-LAST:event_imgPizza14MouseClicked
+
+    private void imgPizza15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgPizza15MouseClicked
+        // TODO add your handling code here:
+        c.exibirDetalhes("Pizza de Brócolis com Alho");
+    }//GEN-LAST:event_imgPizza15MouseClicked
 
     /**
      * @param args the command line arguments
@@ -404,6 +427,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel imgPizza12;
     private javax.swing.JLabel imgPizza13;
     private javax.swing.JLabel imgPizza14;
+    private javax.swing.JLabel imgPizza15;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

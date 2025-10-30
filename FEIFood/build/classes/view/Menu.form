@@ -82,6 +82,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="imgPizza14" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="imgPizza15" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -116,12 +117,14 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="imgPizza12" min="-2" max="-2" attributes="0"/>
-                          <Component id="imgPizza11" min="-2" max="-2" attributes="0"/>
-                          <Component id="imgPizza13" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="imgPizza14" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="imgPizza14" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Component id="imgPizza13" alignment="0" max="32767" attributes="0"/>
+                          <Component id="imgPizza12" alignment="0" max="32767" attributes="0"/>
+                          <Component id="imgPizza11" pref="0" max="32767" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      <Component id="imgPizza15" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -258,8 +261,8 @@
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="2" position="3" title="X-Bacon">
-              <Font PropertyName="font" name="Comic Sans MS" size="14" style="1"/>
+            <TitledBorder justification="2" position="3" title="X-Bacon Duplo">
+              <Font PropertyName="font" name="Comic Sans MS" size="12" style="1"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -406,7 +409,7 @@
           <Color blue="0" green="cc" red="ff" type="rgb"/>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="10" style="0"/>
+          <Font name="Segoe UI" size="14" style="0"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -416,8 +419,8 @@
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="1" position="3" title="Calabresa">
-              <Font PropertyName="font" name="Comic Sans MS" size="10" style="1"/>
+            <TitledBorder justification="2" position="3" title="Calabresa">
+              <Font PropertyName="font" name="Comic Sans MS" size="14" style="1"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -446,7 +449,7 @@
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
             <TitledBorder justification="2" position="3" title="Quatro Queijos">
-              <Font PropertyName="font" name="Comic Sans MS" size="10" style="1"/>
+              <Font PropertyName="font" name="Comic Sans MS" size="12" style="1"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -499,12 +502,12 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/resources/pcalabresa.png"/>
+          <Image iconType="3" name="/resources/pportuguesa.png"/>
         </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="2" position="3" title="Pizza 4 Queijos">
-              <Font PropertyName="font" name="Comic Sans MS" size="10" style="1"/>
+            <TitledBorder justification="2" position="3" title="Portuguesa">
+              <Font PropertyName="font" name="Comic Sans MS" size="14" style="1"/>
             </TitledBorder>
           </Border>
         </Property>
@@ -526,6 +529,35 @@
         </Property>
         <Property name="text" type="java.lang.String" value="PIZZAS"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="imgPizza15">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="cc" red="ff" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="10" style="0"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/resources/pcalabresa.png"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder justification="2" position="3" title="Br&#xf3;colis &amp; Alho">
+              <Font PropertyName="font" name="Comic Sans MS" size="12" style="1"/>
+            </TitledBorder>
+          </Border>
+        </Property>
+        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+          <Color id="Cursor Padr&#xe3;o"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="imgPizza15MouseClicked"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
