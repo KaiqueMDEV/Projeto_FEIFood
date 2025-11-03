@@ -44,9 +44,9 @@ public class ControleMenu {
             alimento = dao.consultarPorNome(nomeDoLanche);
             
         } catch (SQLException e) {
-            e.printStackTrace(); // Mostra o erro real no console
+            e.printStackTrace(); //debug
             JOptionPane.showMessageDialog(view, "Erro ao conectar ao banco de dados!\n" + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            return; // Para a execução se deu erro
+            return; //return em caso de debug
         }
         if (alimento != null) {
             
@@ -67,6 +67,13 @@ public class ControleMenu {
                 case "Pizza de Frango com Catupiry" -> "/resources/fcatupiry_destaque.png";
                 case "Pizza Portuguesa" -> "/resources/portuguesa_destaque.png";
                 case "Pizza de Brócolis com Alho" -> "/resources/brocolis_destaque.png";
+                case "Batata Frita Pequena" -> "/resources/batatafrita_destaque.png";
+                case "Batata Frita Grande" -> "/resources/batatafritag_destaque.png";
+                case "Coca-Cola" -> "/resources/cocacola_destaque.png";
+                case "Coca-Cola Zero" -> "/resources/cocacolazero_destaque.png";
+                case "Guaraná Antarctica" -> "/resources/guarana_destaque.png";
+                case "Suco de Laranja Natural" -> "/resources/sucolaranja_destaque.png"; 
+                case "Cerveja Lager Long Neck" -> "/resources/cerveja_destaque.png";
                 default -> "";
             }; 
             

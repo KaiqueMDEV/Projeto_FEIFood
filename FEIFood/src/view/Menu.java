@@ -67,12 +67,15 @@ public class Menu extends javax.swing.JFrame {
         imgPizza14 = new javax.swing.JLabel();
         lblBebidas = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        imgPizza16 = new javax.swing.JLabel();
-        imgPizza17 = new javax.swing.JLabel();
-        imgPizza18 = new javax.swing.JLabel();
-        imgPizza19 = new javax.swing.JLabel();
-        imgPizza20 = new javax.swing.JLabel();
-        imgBurguer14 = new javax.swing.JLabel();
+        imgAcomp11 = new javax.swing.JLabel();
+        lblBebidas1 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        imgAcomp12 = new javax.swing.JLabel();
+        imgBebida11 = new javax.swing.JLabel();
+        imgBebida12 = new javax.swing.JLabel();
+        imgBebida13 = new javax.swing.JLabel();
+        imgBebida14 = new javax.swing.JLabel();
+        imgBebida15 = new javax.swing.JLabel();
         btnGerarPedido = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
@@ -123,7 +126,7 @@ public class Menu extends javax.swing.JFrame {
         painelTituloAlimento.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         painelTituloAlimento.setForeground(new java.awt.Color(0, 0, 0));
         painelLanche.add(painelTituloAlimento);
-        painelTituloAlimento.setBounds(10, 260, 280, 40);
+        painelTituloAlimento.setBounds(10, 260, 280, 60);
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -136,7 +139,7 @@ public class Menu extends javax.swing.JFrame {
         imgPizza15.setBackground(new java.awt.Color(255, 204, 0));
         imgPizza15.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         imgPizza15.setForeground(new java.awt.Color(255, 255, 255));
-        imgPizza15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pcalabresa.png"))); // NOI18N
+        imgPizza15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pbrocolis.png"))); // NOI18N
         imgPizza15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Brócolis & Alho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
         imgPizza15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         imgPizza15.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,7 +220,7 @@ public class Menu extends javax.swing.JFrame {
         imgPizza13.setBackground(new java.awt.Color(255, 204, 0));
         imgPizza13.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         imgPizza13.setForeground(new java.awt.Color(255, 255, 255));
-        imgPizza13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pcalabresa.png"))); // NOI18N
+        imgPizza13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pfrango.png"))); // NOI18N
         imgPizza13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Frango & Catupiry", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
         imgPizza13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         imgPizza13.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -244,70 +247,95 @@ public class Menu extends javax.swing.JFrame {
 
         lblBebidas.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         lblBebidas.setForeground(new java.awt.Color(0, 0, 0));
-        lblBebidas.setText("SOBREMESAS");
+        lblBebidas.setText("ACOMPANHAMENTOS");
 
-        imgPizza16.setBackground(new java.awt.Color(255, 204, 0));
-        imgPizza16.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        imgPizza16.setForeground(new java.awt.Color(255, 255, 255));
-        imgPizza16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pcalabresa.png"))); // NOI18N
-        imgPizza16.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Brócolis & Alho", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
-        imgPizza16.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        imgPizza16.addMouseListener(new java.awt.event.MouseAdapter() {
+        imgAcomp11.setBackground(new java.awt.Color(255, 204, 0));
+        imgAcomp11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        imgAcomp11.setForeground(new java.awt.Color(255, 255, 255));
+        imgAcomp11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/batatafrita.png"))); // NOI18N
+        imgAcomp11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Batata Frita P", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
+        imgAcomp11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgAcomp11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imgPizza16MouseClicked(evt);
+                imgAcomp11MouseClicked(evt);
             }
         });
 
-        imgPizza17.setBackground(new java.awt.Color(255, 204, 0));
-        imgPizza17.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        imgPizza17.setForeground(new java.awt.Color(255, 255, 255));
-        imgPizza17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/p4queijos.png"))); // NOI18N
-        imgPizza17.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Quatro Queijos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
-        imgPizza17.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        imgPizza17.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblBebidas1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        lblBebidas1.setForeground(new java.awt.Color(0, 0, 0));
+        lblBebidas1.setText("BEBIDAS");
+
+        imgAcomp12.setBackground(new java.awt.Color(255, 204, 0));
+        imgAcomp12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        imgAcomp12.setForeground(new java.awt.Color(255, 255, 255));
+        imgAcomp12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/batatafritag.png"))); // NOI18N
+        imgAcomp12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Batata Frita G", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 12))); // NOI18N
+        imgAcomp12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgAcomp12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imgPizza17MouseClicked(evt);
+                imgAcomp12MouseClicked(evt);
             }
         });
 
-        imgPizza18.setBackground(new java.awt.Color(255, 204, 0));
-        imgPizza18.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        imgPizza18.setForeground(new java.awt.Color(255, 255, 255));
-        imgPizza18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pcalabresa.png"))); // NOI18N
-        imgPizza18.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Calabresa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
-        imgPizza18.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        imgPizza18.addMouseListener(new java.awt.event.MouseAdapter() {
+        imgBebida11.setBackground(new java.awt.Color(255, 204, 0));
+        imgBebida11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        imgBebida11.setForeground(new java.awt.Color(255, 255, 255));
+        imgBebida11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cocacola.png"))); // NOI18N
+        imgBebida11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Coca-Cola", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
+        imgBebida11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgBebida11.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imgPizza18MouseClicked(evt);
+                imgBebida11MouseClicked(evt);
             }
         });
 
-        imgPizza19.setBackground(new java.awt.Color(255, 204, 0));
-        imgPizza19.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        imgPizza19.setForeground(new java.awt.Color(255, 255, 255));
-        imgPizza19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pcalabresa.png"))); // NOI18N
-        imgPizza19.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Frango & Catupiry", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
-        imgPizza19.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        imgPizza19.addMouseListener(new java.awt.event.MouseAdapter() {
+        imgBebida12.setBackground(new java.awt.Color(255, 204, 0));
+        imgBebida12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        imgBebida12.setForeground(new java.awt.Color(255, 255, 255));
+        imgBebida12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cocacolazero.png"))); // NOI18N
+        imgBebida12.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Coca Zero", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
+        imgBebida12.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgBebida12.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imgPizza19MouseClicked(evt);
+                imgBebida12MouseClicked(evt);
             }
         });
 
-        imgPizza20.setBackground(new java.awt.Color(255, 204, 0));
-        imgPizza20.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        imgPizza20.setForeground(new java.awt.Color(255, 255, 255));
-        imgPizza20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/pportuguesa.png"))); // NOI18N
-        imgPizza20.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Portuguesa", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
-        imgPizza20.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        imgPizza20.addMouseListener(new java.awt.event.MouseAdapter() {
+        imgBebida13.setBackground(new java.awt.Color(255, 204, 0));
+        imgBebida13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        imgBebida13.setForeground(new java.awt.Color(255, 255, 255));
+        imgBebida13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/guarana.png"))); // NOI18N
+        imgBebida13.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Guaraná", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
+        imgBebida13.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgBebida13.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imgPizza20MouseClicked(evt);
+                imgBebida13MouseClicked(evt);
             }
         });
 
-        imgBurguer14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/xfrango.png"))); // NOI18N
-        imgBurguer14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "X-Frango", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 14))); // NOI18N
+        imgBebida14.setBackground(new java.awt.Color(255, 204, 0));
+        imgBebida14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        imgBebida14.setForeground(new java.awt.Color(255, 255, 255));
+        imgBebida14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/sucolaranja.png"))); // NOI18N
+        imgBebida14.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Suco de Laranja", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+        imgBebida14.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgBebida14.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgBebida14MouseClicked(evt);
+            }
+        });
+
+        imgBebida15.setBackground(new java.awt.Color(255, 204, 0));
+        imgBebida15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        imgBebida15.setForeground(new java.awt.Color(255, 255, 255));
+        imgBebida15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/cerveja.png"))); // NOI18N
+        imgBebida15.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cerveja Long-Neck", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.BELOW_TOP, new java.awt.Font("Comic Sans MS", 1, 10))); // NOI18N
+        imgBebida15.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        imgBebida15.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                imgBebida15MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -316,18 +344,21 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imgBebida15)
+                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblBebidas1)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(imgPizza18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(imgPizza16))
+                        .addComponent(imgBebida11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(imgBebida12)
                         .addGap(12, 12, 12)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(imgPizza17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(imgBurguer14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(imgBebida13)
+                        .addGap(12, 12, 12)
+                        .addComponent(imgBebida14))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(imgAcomp11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(imgPizza19)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(imgPizza20))
+                        .addComponent(imgAcomp12))
                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblBebidas)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,16 +416,22 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(8, 8, 8)
                 .addComponent(lblBebidas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(imgPizza20, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(imgPizza19, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(imgPizza17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(imgPizza18, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(imgBurguer14, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(imgPizza16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(146, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imgAcomp11, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imgAcomp12, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBebidas1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(imgBebida11, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imgBebida12, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imgBebida13, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imgBebida14, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(imgBebida15, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(156, 156, 156))
         );
 
         jScrollPane2.setViewportView(jPanel1);
@@ -505,30 +542,45 @@ public class Menu extends javax.swing.JFrame {
         c.exibirDetalhes("Pizza de Brócolis com Alho");
     }//GEN-LAST:event_imgPizza15MouseClicked
 
-    private void imgPizza16MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgPizza16MouseClicked
+    private void imgAcomp11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgAcomp11MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_imgPizza16MouseClicked
-
-    private void imgPizza17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgPizza17MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_imgPizza17MouseClicked
-
-    private void imgPizza18MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgPizza18MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_imgPizza18MouseClicked
-
-    private void imgPizza19MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgPizza19MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_imgPizza19MouseClicked
-
-    private void imgPizza20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgPizza20MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_imgPizza20MouseClicked
+        c.exibirDetalhes("Batata Frita Pequena");
+    }//GEN-LAST:event_imgAcomp11MouseClicked
 
     private void imgBurguer13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBurguer13MouseClicked
         // TODO add your handling code here:
         c.exibirDetalhes("X-Frango");
     }//GEN-LAST:event_imgBurguer13MouseClicked
+
+    private void imgAcomp12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgAcomp12MouseClicked
+        // TODO add your handling code here:
+        c.exibirDetalhes("Batata Frita Grande");
+    }//GEN-LAST:event_imgAcomp12MouseClicked
+
+    private void imgBebida11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBebida11MouseClicked
+        // TODO add your handling code here:
+        c.exibirDetalhes("Coca-Cola");
+    }//GEN-LAST:event_imgBebida11MouseClicked
+
+    private void imgBebida12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBebida12MouseClicked
+        // TODO add your handling code here:
+        c.exibirDetalhes("Coca-Cola Zero");
+    }//GEN-LAST:event_imgBebida12MouseClicked
+
+    private void imgBebida13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBebida13MouseClicked
+        // TODO add your handling code here:
+        c.exibirDetalhes("Guaraná Antarctica");
+    }//GEN-LAST:event_imgBebida13MouseClicked
+
+    private void imgBebida14MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBebida14MouseClicked
+        // TODO add your handling code here:
+        c.exibirDetalhes("Suco de Laranja Natural");
+    }//GEN-LAST:event_imgBebida14MouseClicked
+
+    private void imgBebida15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBebida15MouseClicked
+        // TODO add your handling code here:
+        c.exibirDetalhes("Cerveja Long Neck");
+    }//GEN-LAST:event_imgBebida15MouseClicked
 
     /**
      * @param args the command line arguments
@@ -559,27 +611,30 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnGerarPedido;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JLabel imgAcomp11;
+    private javax.swing.JLabel imgAcomp12;
+    private javax.swing.JLabel imgBebida11;
+    private javax.swing.JLabel imgBebida12;
+    private javax.swing.JLabel imgBebida13;
+    private javax.swing.JLabel imgBebida14;
+    private javax.swing.JLabel imgBebida15;
     private javax.swing.JLabel imgBurguer11;
     private javax.swing.JLabel imgBurguer12;
     private javax.swing.JLabel imgBurguer13;
-    private javax.swing.JLabel imgBurguer14;
     private javax.swing.JLabel imgBurguer15;
     private javax.swing.JLabel imgPizza11;
     private javax.swing.JLabel imgPizza12;
     private javax.swing.JLabel imgPizza13;
     private javax.swing.JLabel imgPizza14;
     private javax.swing.JLabel imgPizza15;
-    private javax.swing.JLabel imgPizza16;
-    private javax.swing.JLabel imgPizza17;
-    private javax.swing.JLabel imgPizza18;
-    private javax.swing.JLabel imgPizza19;
-    private javax.swing.JLabel imgPizza20;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lblBebidas;
+    private javax.swing.JLabel lblBebidas1;
     private javax.swing.JLabel lblLanches;
     private javax.swing.JLabel lblPizzas;
     private javax.swing.JTextArea painelDescAlimento;
@@ -644,14 +699,6 @@ public class Menu extends javax.swing.JFrame {
 
     public void setImgBurguer13(JLabel imgBurguer13) {
         this.imgBurguer13 = imgBurguer13;
-    }
-
-    public JLabel getImgBurguer14() {
-        return imgBurguer14;
-    }
-
-    public void setImgBurguer14(JLabel imgBurguer14) {
-        this.imgBurguer14 = imgBurguer14;
     }
 
     public JLabel getImgBurguer15() {

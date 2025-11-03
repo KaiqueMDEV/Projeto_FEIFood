@@ -13,7 +13,14 @@ public class Alimento {
     private int id;
     private String nome;
     private String descricao;
+    private String sabor;
+    private int gramas;
+    private int mililitros;
     private double preco;
+    private String categoria;
+    private boolean zerosugar;
+    private boolean veggie;
+    
 
     public Alimento(int id, String nome, String descricao, double preco) {
         this.id = id;
