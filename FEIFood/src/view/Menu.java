@@ -6,12 +6,16 @@ package view;
 
 import controller.ControleMenu;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import model.Cliente;
 
 /**
@@ -24,6 +28,8 @@ public class Menu extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
     private Cliente cliente;
+    
+    DefaultListModel mod = new DefaultListModel();
 
     /**
      * Creates new form Menu
@@ -32,6 +38,8 @@ public class Menu extends javax.swing.JFrame {
         initComponents();
         this.c = new ControleMenu(this, cliente); // Inicializa o cérebro
         this.cliente = cliente;
+        popUpPesquisa.add(painelPesquisa);
+        listaPesquisa.setModel(mod);
     }
 
     /**
@@ -43,6 +51,10 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        painelPesquisa = new javax.swing.JPanel();
+        scrollPesquisa = new javax.swing.JScrollPane();
+        listaPesquisa = new javax.swing.JList<>();
+        popUpPesquisa = new javax.swing.JPopupMenu();
         painelLanche = new javax.swing.JPanel();
         painelDestaqueAlimento = new javax.swing.JLabel();
         painelPrecoAlimento = new javax.swing.JLabel();
@@ -50,6 +62,8 @@ public class Menu extends javax.swing.JFrame {
         painelDescAlimento = new javax.swing.JTextArea();
         btnAdicionar = new javax.swing.JButton();
         painelTituloAlimento = new javax.swing.JLabel();
+        iconeAlcool = new javax.swing.JLabel();
+        iconeAlcool1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         lblPizzas = new javax.swing.JLabel();
@@ -76,8 +90,29 @@ public class Menu extends javax.swing.JFrame {
         imgBebida13 = new javax.swing.JLabel();
         imgBebida14 = new javax.swing.JLabel();
         imgBebida15 = new javax.swing.JLabel();
+        barraPesquisa = new javax.swing.JTextField();
         btnGerarPedido = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+
+        listaPesquisa.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        scrollPesquisa.setViewportView(listaPesquisa);
+
+        javax.swing.GroupLayout painelPesquisaLayout = new javax.swing.GroupLayout(painelPesquisa);
+        painelPesquisa.setLayout(painelPesquisaLayout);
+        painelPesquisaLayout.setHorizontalGroup(
+            painelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrollPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+        );
+        painelPesquisaLayout.setVerticalGroup(
+            painelPesquisaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(scrollPesquisa, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
+        );
+
+        popUpPesquisa.setFocusable(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("cardapio");
@@ -127,6 +162,14 @@ public class Menu extends javax.swing.JFrame {
         painelTituloAlimento.setForeground(new java.awt.Color(0, 0, 0));
         painelLanche.add(painelTituloAlimento);
         painelTituloAlimento.setBounds(10, 260, 280, 60);
+
+        iconeAlcool.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/alcool.png"))); // NOI18N
+        painelLanche.add(iconeAlcool);
+        iconeAlcool.setBounds(260, 250, 25, 30);
+
+        iconeAlcool1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/alcool.png"))); // NOI18N
+        painelLanche.add(iconeAlcool1);
+        iconeAlcool1.setBounds(290, 250, 25, 30);
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -337,6 +380,14 @@ public class Menu extends javax.swing.JFrame {
             }
         });
 
+        barraPesquisa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        barraPesquisa.setText("Pesquisar...");
+        barraPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                barraPesquisaKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -364,16 +415,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lblPizzas)
                         .addComponent(lblLanches)
-                        .addComponent(jLabel1)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(imgBurguer11)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(imgBurguer12)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(imgBurguer13)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(imgBurguer15))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(imgPizza11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -383,14 +425,31 @@ public class Menu extends javax.swing.JFrame {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addComponent(imgPizza13)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(imgPizza14))))
-                .addContainerGap(148, Short.MAX_VALUE))
+                            .addComponent(imgPizza14))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(imgBurguer11)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(imgBurguer12)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(imgBurguer13)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(imgBurguer15))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(138, 138, 138)
+                            .addComponent(barraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(barraPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addComponent(lblLanches)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -582,6 +641,10 @@ public class Menu extends javax.swing.JFrame {
         c.exibirDetalhes("Cerveja Long Neck");
     }//GEN-LAST:event_imgBebida15MouseClicked
 
+    private void barraPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_barraPesquisaKeyReleased
+        c.pesquisa(mod);
+    }//GEN-LAST:event_barraPesquisaKeyReleased
+
     /**
      * @param args the command line arguments
      */
@@ -608,9 +671,12 @@ public class Menu extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField barraPesquisa;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnGerarPedido;
     private javax.swing.JButton btnVoltar;
+    private javax.swing.JLabel iconeAlcool;
+    private javax.swing.JLabel iconeAlcool1;
     private javax.swing.JLabel imgAcomp11;
     private javax.swing.JLabel imgAcomp12;
     private javax.swing.JLabel imgBebida11;
@@ -637,12 +703,16 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel lblBebidas1;
     private javax.swing.JLabel lblLanches;
     private javax.swing.JLabel lblPizzas;
+    private javax.swing.JList<String> listaPesquisa;
     private javax.swing.JTextArea painelDescAlimento;
     private javax.swing.JLabel painelDestaqueAlimento;
     private javax.swing.JPanel painelLanche;
+    private javax.swing.JPanel painelPesquisa;
     private javax.swing.JLabel painelPrecoAlimento;
     private javax.swing.JLabel painelTituloAlimento;
+    private javax.swing.JPopupMenu popUpPesquisa;
     private javax.swing.JScrollPane scrollCardapio;
+    private javax.swing.JScrollPane scrollPesquisa;
     // End of variables declaration//GEN-END:variables
 
     public ControleMenu getC() {
@@ -780,6 +850,25 @@ public class Menu extends javax.swing.JFrame {
     public void setPainelTituloAlimento(JLabel painelTituloAlimento) {
         this.painelTituloAlimento = painelTituloAlimento;
     }
+
+    public JTextField getBarraPesquisa() {
+        return barraPesquisa;
+    }
+
+    public JPanel getPainelPesquisa() {
+        return painelPesquisa;
+    }
+
+    public JPopupMenu getPopUpPesquisa() {
+        return popUpPesquisa;
+    }
+
+    public JList<String> getListaPesquisa() {
+        return listaPesquisa;
+    }
+    
+    
+    
 
     
     

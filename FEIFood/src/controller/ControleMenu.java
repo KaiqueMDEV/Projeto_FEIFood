@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.DefaultListModel;
 import model.Alimento;
 import model.Cliente;
 import view.Menu;
@@ -73,7 +74,7 @@ public class ControleMenu {
                 case "Coca-Cola Zero" -> "/resources/cocacolazero_destaque.png";
                 case "Guaraná Antarctica" -> "/resources/guarana_destaque.png";
                 case "Suco de Laranja Natural" -> "/resources/sucolaranja_destaque.png"; 
-                case "Cerveja Lager Long Neck" -> "/resources/cerveja_destaque.png";
+                case "Cerveja Long Neck" -> "/resources/cerveja_destaque.png";
                 default -> "";
             }; 
             
@@ -90,6 +91,35 @@ public class ControleMenu {
             
         } else {
             JOptionPane.showMessageDialog(view, "Alimento '" + nomeDoLanche + "' não encontrado no cadastro.", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+        
+    }
+    public void pesquisa(DefaultListModel mod){
+        mod.removeAllElements();
+        
+        if (view.getBarraPesquisa().getText().equals("")){
+            view.getPopUpPesquisa().setVisible(false);
+        }else{
+            view.getPopUpPesquisa().show(view.getBarraPesquisa(), 0, view.getBarraPesquisa().getHeight());
+            Connection conn = null;
+            try{
+                Conexao conexao = new Conexao();
+                conn = conexao.getConnection();
+                AlimentoDAO dao = new AlimentoDAO(conn); 
+                dao.pesquisarPorNome(view.getBarraPesquisa().getText(), mod);
+          
+            }catch(Exception e){
+                System.out.println(e.getMessage());
+                
+            }finally{
+                if(conn != null){
+                    try{
+                        conn.close();
+                    }catch(SQLException e){
+                        System.err.println("Erro ao fechar conexao: "+ e.getMessage());
+                    }
+                }
+            }
         }
     }
 }

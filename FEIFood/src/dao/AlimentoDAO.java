@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.DefaultListModel;
 import model.Alimento;
 
 /**
@@ -45,6 +46,18 @@ public class AlimentoDAO {
         
         conn.close();
         return alimento;
+    }
+        public void pesquisarPorNome(String pesquisaLanche, DefaultListModel mod) throws SQLException {
+        
+        String sql = "SELECT nome FROM tbalimentos WHERE nome ILIKE ?";
+        
+        PreparedStatement statement = conn.prepareStatement(sql);  
+        statement.setString(1, pesquisaLanche + "%");
+        ResultSet resultado = statement.executeQuery(); // Executa a busca   
+        
+        while (resultado.next()){
+            mod.addElement(resultado.getString("nome"));
+        }
     }
 }
 
