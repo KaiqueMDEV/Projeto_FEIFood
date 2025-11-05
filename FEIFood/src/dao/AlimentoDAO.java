@@ -41,7 +41,16 @@ public class AlimentoDAO {
             String nome = resultado.getString("nome");
             String descricao = resultado.getString("descricao");
             double preco = resultado.getDouble("preco");
-            alimento = new Alimento(id, nome, descricao, preco);
+            boolean zerosugar = resultado.getBoolean("zero_sugar");
+            boolean veggie = resultado.getBoolean("veggie");
+            boolean alcool;
+            double teor_alcoolico = resultado.getDouble("teor_alcoolico");
+            if (teor_alcoolico > 0){
+                alcool = true;
+            }else{
+                alcool = false;
+            }
+            alimento = new Alimento(id, nome, descricao, preco, zerosugar, veggie, alcool);
         }
         
         conn.close();

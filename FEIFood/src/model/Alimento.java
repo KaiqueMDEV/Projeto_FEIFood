@@ -14,19 +14,20 @@ public class Alimento {
     private String nome;
     private String descricao;
     private String sabor;
-    private int gramas;
-    private int mililitros;
     private double preco;
-    private String categoria;
     private boolean zerosugar;
     private boolean veggie;
+    private boolean alcool;
     
 
-    public Alimento(int id, String nome, String descricao, double preco) {
+    public Alimento(int id, String nome, String descricao, double preco, boolean zerosugar, boolean veggie, boolean alcool) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
+        this.zerosugar = zerosugar;
+        this.veggie = veggie;
+        this.alcool = alcool;
     }
 
     public int getId() {
@@ -44,4 +45,22 @@ public class Alimento {
     public double getPreco() {
         return preco;
     }
+
+    public String getSabor() {
+        return sabor;
+    }
+
+    public boolean isZerosugar() {
+        return zerosugar;
+    }
+
+    public boolean isVeggie() {
+        return veggie;
+    }
+
+    public boolean isAlcool() {
+        return alcool;
+    }
+    
+    
 }

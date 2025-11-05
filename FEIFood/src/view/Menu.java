@@ -63,7 +63,8 @@ public class Menu extends javax.swing.JFrame {
         btnAdicionar = new javax.swing.JButton();
         painelTituloAlimento = new javax.swing.JLabel();
         iconeAlcool = new javax.swing.JLabel();
-        iconeAlcool1 = new javax.swing.JLabel();
+        iconeZero = new javax.swing.JLabel();
+        iconeVeggie = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         lblPizzas = new javax.swing.JLabel();
@@ -98,6 +99,11 @@ public class Menu extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        listaPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaPesquisaMouseClicked(evt);
+            }
         });
         scrollPesquisa.setViewportView(listaPesquisa);
 
@@ -167,9 +173,13 @@ public class Menu extends javax.swing.JFrame {
         painelLanche.add(iconeAlcool);
         iconeAlcool.setBounds(260, 250, 25, 30);
 
-        iconeAlcool1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/alcool.png"))); // NOI18N
-        painelLanche.add(iconeAlcool1);
-        iconeAlcool1.setBounds(290, 250, 25, 30);
+        iconeZero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/zerosugar.png"))); // NOI18N
+        painelLanche.add(iconeZero);
+        iconeZero.setBounds(290, 250, 25, 30);
+
+        iconeVeggie.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resources/veggie.png"))); // NOI18N
+        painelLanche.add(iconeVeggie);
+        iconeVeggie.setBounds(230, 250, 25, 30);
 
         jScrollPane2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -382,6 +392,21 @@ public class Menu extends javax.swing.JFrame {
 
         barraPesquisa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         barraPesquisa.setText("Pesquisar...");
+        barraPesquisa.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                barraPesquisaFocusLost(evt);
+            }
+        });
+        barraPesquisa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                barraPesquisaMouseClicked(evt);
+            }
+        });
+        barraPesquisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                barraPesquisaActionPerformed(evt);
+            }
+        });
         barraPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 barraPesquisaKeyReleased(evt);
@@ -645,6 +670,47 @@ public class Menu extends javax.swing.JFrame {
         c.pesquisa(mod);
     }//GEN-LAST:event_barraPesquisaKeyReleased
 
+    private void listaPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPesquisaMouseClicked
+        // TODO add your handling code here:
+        String nomeSelecionado = listaPesquisa.getSelectedValue(); //verifica se o usuário realmente clicou em um item
+        if (nomeSelecionado != null) {
+            // 1. Chama o controller para exibir os detalhes
+            c.exibirDetalhes(nomeSelecionado);
+            // 2. Esconde o popup da pesquisa
+            popUpPesquisa.setVisible(false);
+            // 3. Limpa a barra de pesquisa
+            barraPesquisa.setText("");
+        }       
+
+    }//GEN-LAST:event_listaPesquisaMouseClicked
+
+    private void barraPesquisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barraPesquisaActionPerformed
+        // TODO add your handling code here:
+        String nomeSelecionado = listaPesquisa.getSelectedValue();
+        if (nomeSelecionado == null && !mod.isEmpty()) {
+            //pega o primeiro item da lista
+            nomeSelecionado = (String) mod.getElementAt(0);
+        }
+        if (nomeSelecionado != null) {
+            c.exibirDetalhes(nomeSelecionado);
+            popUpPesquisa.setVisible(false);
+            barraPesquisa.setText("");
+        }
+    }//GEN-LAST:event_barraPesquisaActionPerformed
+
+    private void barraPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barraPesquisaMouseClicked
+        // TODO add your handling code here:
+        barraPesquisa.setText("");
+    }//GEN-LAST:event_barraPesquisaMouseClicked
+
+    private void barraPesquisaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_barraPesquisaFocusLost
+        // TODO add your handling code here:
+        if (barraPesquisa.getText().isEmpty()) {
+        barraPesquisa.setText("Pesquisar...");
+        }
+        popUpPesquisa.setVisible(false);
+    }//GEN-LAST:event_barraPesquisaFocusLost
+
     /**
      * @param args the command line arguments
      */
@@ -676,7 +742,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton btnGerarPedido;
     private javax.swing.JButton btnVoltar;
     private javax.swing.JLabel iconeAlcool;
-    private javax.swing.JLabel iconeAlcool1;
+    private javax.swing.JLabel iconeVeggie;
+    private javax.swing.JLabel iconeZero;
     private javax.swing.JLabel imgAcomp11;
     private javax.swing.JLabel imgAcomp12;
     private javax.swing.JLabel imgBebida11;
@@ -866,6 +933,19 @@ public class Menu extends javax.swing.JFrame {
     public JList<String> getListaPesquisa() {
         return listaPesquisa;
     }
+
+    public JLabel getIconeAlcool() {
+        return iconeAlcool;
+    }
+
+    public JLabel getIconeVeggie() {
+        return iconeVeggie;
+    }
+
+    public JLabel getIconeZero() {
+        return iconeZero;
+    }
+    
     
     
     

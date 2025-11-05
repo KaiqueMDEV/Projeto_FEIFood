@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import model.Alimento;
 import model.Cliente;
+import model.Pedido;
 import view.Menu;
 
 /**
@@ -21,14 +22,18 @@ import view.Menu;
  */
 public class ControleMenu {
     
-    private Menu view; // A tela que este cérebro controla
-    private Cliente cliente; // O usuário que está logado
+    private Menu view; //A tela que este cérebro controla
+    private Cliente cliente; //O usuário que está logado
+    private Pedido pedidoAtual;         //O carrinho de compras
+    private Alimento alimentoEmDestaque;
 
     // Construtor: Recebe a tela e o usuário logado
     public ControleMenu(Menu view, Cliente cliente) {
         this.view = view;
         this.cliente = cliente;
+        this.pedidoAtual = new Pedido(this.cliente);
     }
+    
     
     /**
      * O método principal: busca dados no banco e atualiza a tela
@@ -55,6 +60,9 @@ public class ControleMenu {
             view.getPainelTituloAlimento().setText(alimento.getNome());
             view.getPainelDescAlimento().setText(alimento.getDescricao());
             view.getPainelPrecoAlimento().setText("R$: " + String.valueOf(alimento.getPreco()));
+            view.getIconeAlcool().setVisible(alimento.isAlcool());
+            view.getIconeZero().setVisible(alimento.isZerosugar());
+            view.getIconeVeggie().setVisible(alimento.isVeggie());
 
             String caminhoImagem = "";
             
@@ -92,6 +100,7 @@ public class ControleMenu {
         } else {
             JOptionPane.showMessageDialog(view, "Alimento '" + nomeDoLanche + "' não encontrado no cadastro.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
+        this.alimentoEmDestaque = alimento;
         
     }
     public void pesquisa(DefaultListModel mod){
