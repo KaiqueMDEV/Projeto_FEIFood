@@ -10,6 +10,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
@@ -17,6 +18,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.Cliente;
+import model.Pedido;
 
 /**
  *
@@ -580,6 +582,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnGerarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPedidoActionPerformed
         // TODO add your handling code here:
+        c.finalizarPedido();
     }//GEN-LAST:event_btnGerarPedidoActionPerformed
 
     private void imgBurguer11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgBurguer11MouseClicked
@@ -599,6 +602,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
+        c.adicionarItemAoPedido();
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void imgPizza11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgPizza11MouseClicked

@@ -15,6 +15,7 @@ import model.Alimento;
 import model.Cliente;
 import model.Pedido;
 import view.Menu;
+import view.PedidoFinal;
 
 /**
  *
@@ -131,4 +132,47 @@ public class ControleMenu {
             }
         }
     }
+    public void adicionarItemAoPedido() {
+        // Verifica se há um item na vitrine
+        if (this.alimentoEmDestaque != null) {
+            
+            // Adiciona o item ao pedido
+            this.pedidoAtual.adicionarItem(this.alimentoEmDestaque);
+            
+            // Dá um feedback para o usuário
+            String nome = this.alimentoEmDestaque.getNome();
+            JOptionPane.showMessageDialog(view, nome + " foi adicionado ao seu pedido!", "Item Adicionado", JOptionPane.INFORMATION_MESSAGE);
+            
+        } else {
+            // Se o usuário clicar em "Adicionar" sem ter selecionado um item
+            JOptionPane.showMessageDialog(view, "Por favor, clique em um item do cardápio primeiro.", "Erro", JOptionPane.WARNING_MESSAGE);
+        }
+    }
+
+    public Pedido getPedidoAtual() {
+        return this.pedidoAtual;
+    }
+    
+    public void finalizarPedido() {
+        
+        // 1. Pega o carrinho de compras atual
+        Pedido pedidoParaFinalizar = this.pedidoAtual; // (Não precisamos do getter, já temos acesso)
+
+        // 2. O Controller toma a decisão lógica
+        if (pedidoParaFinalizar.getItensDoPedido().isEmpty()) {
+            // O Controller diz à View para mostrar o aviso
+            JOptionPane.showMessageDialog(this.view, "Seu carrinho está vazio!", "Aviso", JOptionPane.WARNING_MESSAGE);
+            // return; // Não continua
+        
+        } else {
+            
+            // 3. O Controller controla a navegação
+            PedidoFinal telaFinal = new PedidoFinal(this.cliente, pedidoParaFinalizar);
+    
+            // 4. O Controller abre a nova tela e fecha a antiga
+            telaFinal.setVisible(true);
+            this.view.setVisible(false); // 'this.view' é a tela Menu
+        }
+    }
+    
 }
