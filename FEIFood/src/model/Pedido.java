@@ -6,6 +6,7 @@ package model;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.sql.Timestamp;
 /**
  *
  * @author Micro
@@ -20,6 +21,8 @@ public class Pedido {
     // (Também guardamos os dados da tabela 'pedido' do seu SQL)
     private int id;
     private double valorTotal;
+    private Timestamp dataHora; // NOVO!
+    private int avaliacao;
     // ... (outros campos como data, avaliacao, etc. podem vir depois)
 
     /**
@@ -30,6 +33,16 @@ public class Pedido {
         this.cliente = cliente;
         this.itensDoPedido = new HashMap<>(); // Cria o mapa vazio
         this.valorTotal = 0.0;
+        this.dataHora = null;
+        this.avaliacao = 0;
+    }
+    public Pedido(int id, Timestamp dataHora, double valorTotal, int avaliacao, Cliente cliente) {
+        this.id = id;
+        this.dataHora = dataHora;
+        this.valorTotal = valorTotal;
+        this.avaliacao = avaliacao;
+        this.cliente = cliente;
+        this.itensDoPedido = new HashMap<>(); //O carrinho começa vazio
     }
     
     /**
@@ -67,4 +80,23 @@ public class Pedido {
     public double getValorTotal() {
         return valorTotal;
     }
+    public int getId() {
+        return id;
+    }
+    
+    public Timestamp getDataHora() {
+        return dataHora;
+    }
+
+    public int getAvaliacao() {
+        return avaliacao;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    public void setAvaliacao(int avaliacao) {
+        this.avaliacao = avaliacao;
+    }
+    
 }

@@ -35,7 +35,8 @@ public class ControleLogin {
                 String nome = res.getString("nome");
                 String username = res.getString("username");
                 String senha = res.getString("senha");
-                Logado tela2 = new Logado(new Cliente(nome, username, senha));
+                int id = res.getInt("id");
+                Logado tela2 = new Logado(new Cliente(id, nome, username, senha));
                 tela2.setVisible(true);
                 tela1.setVisible(false);
             }else{

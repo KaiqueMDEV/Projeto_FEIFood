@@ -29,7 +29,7 @@ public class ControleExclusao {
     public void remover(){
         int option = JOptionPane.showConfirmDialog(tela5, "Deseja Realmente excluir o cadastro?",
                 "Aviso", JOptionPane.YES_NO_OPTION);
-        if(option != 1){
+        if(option == JOptionPane.YES_OPTION){
             Conexao conexao = new Conexao();
             try{
                 Connection conn = conexao.getConnection();

@@ -21,7 +21,7 @@ public class ClienteDAO {
         String sql = "select * from tbusuarios where username = ? and senha = ?";       
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setString(1, usuario.getUsername()); // Pega o usuário do objeto
-        statement.setString(2, usuario.getSenha());   // Pega a senha do objeto    
+        statement.setString(2, usuario.getSenha());   // Pega a senha do objeto
         statement.execute();        
         ResultSet resultado = statement.getResultSet();
         return resultado;
@@ -29,14 +29,12 @@ public class ClienteDAO {
 
 
     public void inserir(Cliente usuario) throws SQLException {
-        // SQL para inserir os três campos
-        String sql = "insert into tbusuarios (nome, username, senha) values ('"
-                + usuario.getNome() + " ', ' "
-                + usuario.getUsername() + " ',' "
-                + usuario.getSenha() + " ')";
-        PreparedStatement statement = conn.prepareStatement(sql);
-        statement.execute();
-        conn.close();
+            String sql = "insert into tbusuarios (nome, username, senha) values (?, ?, ?)";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, usuario.getNome());
+            statement.setString(2, usuario.getUsername());
+            statement.setString(3, usuario.getSenha());
+            statement.execute();
     }
 
 
@@ -49,7 +47,6 @@ public class ClienteDAO {
         statement.setString(2, usuario.getUsername()); // O usuário a ser atualizado
         
         statement.execute();
-        conn.close(); // Fecha a conexão
     }
 
 
@@ -61,6 +58,5 @@ public class ClienteDAO {
         statement.setString(1, usuario.getUsername()); // O usuário a ser removido
         
         statement.execute();
-        conn.close(); // Fecha a conexão
     }
 }

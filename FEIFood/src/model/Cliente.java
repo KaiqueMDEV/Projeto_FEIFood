@@ -10,14 +10,19 @@ package model;
  */
 public class Cliente {
     private String nome,username,senha;
+    private int id;
     
-    public Cliente(){       
-    }
-    
-    public Cliente(String nome, String username, String senha){
+    public Cliente(String nome, String username, String senha){   
         this.username = username;
         this.senha = senha;
     }
+    
+    public Cliente(int id, String nome, String username, String senha){
+        this.username = username;
+        this.senha = senha;
+        this.id = id;
+    }
+    
 
     public String getNome() {
         return nome;
@@ -41,6 +46,9 @@ public class Cliente {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+    public int getId(){
+        return this.id;
     }
     
     

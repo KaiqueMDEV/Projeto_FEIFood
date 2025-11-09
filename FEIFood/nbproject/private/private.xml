@@ -5,20 +5,22 @@
         <group>
             <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/controller/ControleMenu.java</file>
             <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/controller/ControleAlteracao.java</file>
-            <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/view/Menu.java</file>
+            <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/view/Cardapio.java</file>
             <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/dao/AlimentoDAO.java</file>
             <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/model/Alimento.java</file>
             <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/view/Logado.java</file>
             <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/controller/ControleCadastro.java</file>
             <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/dao/ClienteDAO.java</file>
             <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/feifood/FEIFood.java</file>
-            <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/resources/pcalabresa_destaque.png</file>
-            <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/resources/brocolis_destaque.png</file>
-            <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/model/Cliente.java</file>
             <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/view/Alteracao.java</file>
             <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/model/Pedido.java</file>
             <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/view/PedidoFinal.java</file>
             <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/view/Cadastro.java</file>
+            <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/view/Pedidos.java</file>
+            <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/dao/PedidoDAO.java</file>
+            <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/controller/ControlePedidos.java</file>
+            <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/model/Cliente.java</file>
+            <file>file:/C:/Users/Micro/Documents/GitHub/Projeto_FEIFood/FEIFood/src/dao/Conexao.java</file>
         </group>
     </open-files>
 </project-private>

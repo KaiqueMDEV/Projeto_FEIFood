@@ -14,7 +14,7 @@ import javax.swing.DefaultListModel;
 import model.Alimento;
 import model.Cliente;
 import model.Pedido;
-import view.Menu;
+import view.Cardapio;
 import view.PedidoFinal;
 
 /**
@@ -23,13 +23,13 @@ import view.PedidoFinal;
  */
 public class ControleMenu {
     
-    private Menu view; //A tela que este cérebro controla
+    private Cardapio view; //A tela que este cérebro controla
     private Cliente cliente; //O usuário que está logado
     private Pedido pedidoAtual;         //O carrinho de compras
     private Alimento alimentoEmDestaque;
 
     // Construtor: Recebe a tela e o usuário logado
-    public ControleMenu(Menu view, Cliente cliente) {
+    public ControleMenu(Cardapio view, Cliente cliente) {
         this.view = view;
         this.cliente = cliente;
         this.pedidoAtual = new Pedido(this.cliente);
@@ -171,7 +171,7 @@ public class ControleMenu {
     
             // 4. O Controller abre a nova tela e fecha a antiga
             telaFinal.setVisible(true);
-            this.view.setVisible(false); // 'this.view' é a tela Menu
+            this.view.setVisible(false);
         }
     }
     

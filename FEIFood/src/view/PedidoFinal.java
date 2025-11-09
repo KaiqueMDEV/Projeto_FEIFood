@@ -4,8 +4,17 @@
  */
 package view;
 
+import controller.ControlePedidoFinal;
 import java.util.Map;
+import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JToggleButton;
 import model.Alimento;
 import model.Cliente;
 import model.Pedido;
@@ -17,39 +26,20 @@ import model.Pedido;
 public class PedidoFinal extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PedidoFinal.class.getName());
-    private Cliente c;
+    private Cliente cliente;
     private Pedido p;
+    private ControlePedidoFinal c;
 
     /**
      * Creates new form PedidoFinal
      */
     public PedidoFinal(Cliente cliente, Pedido pedido) {
         initComponents();
-        this.c = cliente; 
+        this.cliente = cliente; 
         this.p = pedido;
-        
-        // 1. Crie um 'Model' para a sua JList
-        DefaultListModel<String> modelLista = new DefaultListModel<>();
-        
-        // 2. Use o Map do Pedido para preencher o model
-        for (Map.Entry<Alimento, Integer> item : pedido.getItensDoPedido().entrySet()) {
-            Alimento alimento = item.getKey();
-            Integer quantidade = item.getValue();
-            // Formata uma string bonita para a lista
-            String linha = String.format("%dx %s (R$ %.2f)", 
-            quantidade, 
-            alimento.getNome(), 
-            alimento.getPreco());
-            modelLista.addElement(linha);
-        }
-
-        // 3. Adicione o total ao final da lista (ou num JLabel separado)
-        modelLista.addElement("----------------------");
-        modelLista.addElement(String.format("TOTAL: R$ %.2f", pedido.getValorTotal()));
-
-        // 4. Defina este model na sua JList (ex: jListPedido)
-        listaPedido.setModel(modelLista);
+        this.c = new ControlePedidoFinal(this, cliente, pedido);
     }
+  
     
     
 
@@ -62,24 +52,46 @@ public class PedidoFinal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        groupAvaliacao = new javax.swing.ButtonGroup();
+        btnPedidos = new javax.swing.JToggleButton();
+        btnFinalizar = new javax.swing.JToggleButton();
+        btnExcluir = new javax.swing.JToggleButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaPedido = new javax.swing.JList<>();
+        botaoAvaliar1 = new javax.swing.JRadioButton();
+        botaoAvaliar2 = new javax.swing.JRadioButton();
+        botaoAvaliar3 = new javax.swing.JRadioButton();
+        botaoAvaliar4 = new javax.swing.JRadioButton();
+        botaoAvaliar5 = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jToggleButton1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jToggleButton1.setText("Pedidos");
+        btnPedidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnPedidos.setText("Pedidos");
+        btnPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosActionPerformed(evt);
+            }
+        });
 
-        jToggleButton2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jToggleButton2.setText("Finalizar");
+        btnFinalizar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btnFinalizar.setText("Finalizar");
+        btnFinalizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarActionPerformed(evt);
+            }
+        });
 
-        jToggleButton3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jToggleButton3.setForeground(new java.awt.Color(255, 0, 0));
-        jToggleButton3.setText("Excluir Pedido");
+        btnExcluir.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        btnExcluir.setForeground(new java.awt.Color(255, 0, 0));
+        btnExcluir.setText("Excluir Pedido");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -88,6 +100,11 @@ public class PedidoFinal extends javax.swing.JFrame {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
+        });
+        listaPedido.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listaPedidoMouseClicked(evt);
+            }
         });
         jScrollPane1.setViewportView(listaPedido);
 
@@ -99,44 +116,190 @@ public class PedidoFinal extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
+
+        botaoAvaliar1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        botaoAvaliar1.setText("1");
+        botaoAvaliar1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoAvaliar1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botaoAvaliar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAvaliar1ActionPerformed(evt);
+            }
+        });
+
+        botaoAvaliar2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        botaoAvaliar2.setText("2");
+        botaoAvaliar2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoAvaliar2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botaoAvaliar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAvaliar2ActionPerformed(evt);
+            }
+        });
+
+        botaoAvaliar3.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        botaoAvaliar3.setText("3");
+        botaoAvaliar3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoAvaliar3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botaoAvaliar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAvaliar3ActionPerformed(evt);
+            }
+        });
+
+        botaoAvaliar4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        botaoAvaliar4.setText("4");
+        botaoAvaliar4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoAvaliar4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botaoAvaliar4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAvaliar4ActionPerformed(evt);
+            }
+        });
+
+        botaoAvaliar5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        botaoAvaliar5.setText("5");
+        botaoAvaliar5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoAvaliar5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botaoAvaliar5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAvaliar5ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel1.setText("AVALIAÇÃO");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(130, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(btnPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(botaoAvaliar1)
+                                .addGap(18, 18, 18)
+                                .addComponent(botaoAvaliar2)
+                                .addGap(18, 18, 18)
+                                .addComponent(botaoAvaliar3)
+                                .addGap(18, 18, 18)
+                                .addComponent(botaoAvaliar4)))
+                        .addGap(18, 18, 18)
+                        .addComponent(botaoAvaliar5))
+                    .addComponent(btnFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botaoAvaliar1)
+                    .addComponent(botaoAvaliar2)
+                    .addComponent(botaoAvaliar3)
+                    .addComponent(botaoAvaliar4)
+                    .addComponent(botaoAvaliar5))
+                .addGap(27, 27, 27)
+                .addComponent(btnFinalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    public void mostrarPainelAvaliacao(boolean visivel) {
+        jLabel1.setVisible(visivel); // O label "AVALIAÇÃO"
+        botaoAvaliar1.setVisible(visivel);
+        botaoAvaliar2.setVisible(visivel);
+        botaoAvaliar3.setVisible(visivel);
+        botaoAvaliar4.setVisible(visivel);
+        botaoAvaliar5.setVisible(visivel);
+    }
+    
+    public void mostrarAvaliacaoSalva(int nota) {
+        // Marca o botão correto
+        if (nota == 1) botaoAvaliar1.setSelected(true);
+        if (nota == 2) botaoAvaliar2.setSelected(true);
+        if (nota == 3) botaoAvaliar3.setSelected(true);
+        if (nota == 4) botaoAvaliar4.setSelected(true);
+        if (nota == 5) botaoAvaliar5.setSelected(true);
+        
+        // Desabilita todos os botões
+        botaoAvaliar1.setEnabled(false);
+        botaoAvaliar2.setEnabled(false);
+        botaoAvaliar3.setEnabled(false);
+        botaoAvaliar4.setEnabled(false);
+        botaoAvaliar5.setEnabled(false);
+    }
+    private void listaPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPedidoMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaPedidoMouseClicked
+
+    private void btnFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarActionPerformed
+        // TODO add your handling code here:
+        c.finalizarPedido();
+    }//GEN-LAST:event_btnFinalizarActionPerformed
+
+    private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
+        // TODO add your handling code here:
+        Pedidos p = new Pedidos(cliente);
+        this.setVisible(false);
+        p.setVisible(true);       
+    }//GEN-LAST:event_btnPedidosActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        c.excluirPedidoAtual();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void botaoAvaliar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvaliar2ActionPerformed
+        // TODO add your handling code here:
+        c.avaliar(2);
+    }//GEN-LAST:event_botaoAvaliar2ActionPerformed
+
+    private void botaoAvaliar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvaliar3ActionPerformed
+        // TODO add your handling code here:
+        c.avaliar(3);
+    }//GEN-LAST:event_botaoAvaliar3ActionPerformed
+
+    private void botaoAvaliar4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvaliar4ActionPerformed
+        // TODO add your handling code here:
+        c.avaliar(4);
+    }//GEN-LAST:event_botaoAvaliar4ActionPerformed
+
+    private void botaoAvaliar5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvaliar5ActionPerformed
+        // TODO add your handling code here:
+        c.avaliar(5);    
+    }//GEN-LAST:event_botaoAvaliar5ActionPerformed
+
+    private void botaoAvaliar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvaliar1ActionPerformed
+        // TODO add your handling code here:
+        c.avaliar(1);
+    }//GEN-LAST:event_botaoAvaliar1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,11 +327,116 @@ public class PedidoFinal extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton botaoAvaliar1;
+    private javax.swing.JRadioButton botaoAvaliar2;
+    private javax.swing.JRadioButton botaoAvaliar3;
+    private javax.swing.JRadioButton botaoAvaliar4;
+    private javax.swing.JRadioButton botaoAvaliar5;
+    private javax.swing.JToggleButton btnExcluir;
+    private javax.swing.JToggleButton btnFinalizar;
+    private javax.swing.JToggleButton btnPedidos;
+    private javax.swing.ButtonGroup groupAvaliacao;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JList<String> listaPedido;
     // End of variables declaration//GEN-END:variables
+
+    public static Logger getLogger() {
+        return logger;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public Pedido getP() {
+        return p;
+    }
+
+    public ControlePedidoFinal getC() {
+        return c;
+    }
+
+    public JToggleButton getBtnExcluir() {
+        return btnExcluir;
+    }
+
+    public JToggleButton getBtnFinalizar() {
+        return btnFinalizar;
+    }
+
+    public JToggleButton getBtnPedidos() {
+        return btnPedidos;
+    }
+
+    public JPanel getjPanel1() {
+        return jPanel1;
+    }
+
+    public JScrollPane getjScrollPane1() {
+        return jScrollPane1;
+    }
+
+    public JList<String> getListaPedido() {
+        return listaPedido;
+    }
+
+    public JRadioButton getBotaoAvaliar1() {
+        return botaoAvaliar1;
+    }
+
+    public void setBotaoAvaliar1(JRadioButton botaoAvaliar1) {
+        this.botaoAvaliar1 = botaoAvaliar1;
+    }
+
+    public JRadioButton getBotaoAvaliar2() {
+        return botaoAvaliar2;
+    }
+
+    public void setBotaoAvaliar2(JRadioButton botaoAvaliar2) {
+        this.botaoAvaliar2 = botaoAvaliar2;
+    }
+
+    public JRadioButton getBotaoAvaliar3() {
+        return botaoAvaliar3;
+    }
+
+    public void setBotaoAvaliar3(JRadioButton botaoAvaliar3) {
+        this.botaoAvaliar3 = botaoAvaliar3;
+    }
+
+    public JRadioButton getBotaoAvaliar4() {
+        return botaoAvaliar4;
+    }
+
+    public void setBotaoAvaliar4(JRadioButton botaoAvaliar4) {
+        this.botaoAvaliar4 = botaoAvaliar4;
+    }
+
+    public JRadioButton getBotaoAvaliar5() {
+        return botaoAvaliar5;
+    }
+
+    public void setBotaoAvaliar5(JRadioButton botaoAvaliar5) {
+        this.botaoAvaliar5 = botaoAvaliar5;
+    }
+
+    public ButtonGroup getGroupAvaliacao() {
+        return groupAvaliacao;
+    }
+
+    public void setGroupAvaliacao(ButtonGroup groupAvaliacao) {
+        this.groupAvaliacao = groupAvaliacao;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+    
+
 }

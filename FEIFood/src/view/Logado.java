@@ -5,9 +5,11 @@
 package view;
 
 import controller.ControleLogado;
+import controller.ControlePedidos;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import view.Pedidos;
 import model.Cliente;
 
 /**
@@ -134,13 +136,16 @@ public class Logado extends javax.swing.JFrame {
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         // TODO add your handling code here:
-        Menu menu = new Menu(cliente);
+        Cardapio menu = new Cardapio(cliente);
         this.setVisible(false);
         menu.setVisible(true);
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
         // TODO add your handling code here:
+        Pedidos p = new Pedidos(cliente);
+        this.setVisible(false);
+        p.setVisible(true);
     }//GEN-LAST:event_btnPedidosActionPerformed
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
