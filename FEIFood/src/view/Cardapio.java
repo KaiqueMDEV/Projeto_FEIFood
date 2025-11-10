@@ -122,7 +122,7 @@ public class Cardapio extends javax.swing.JFrame {
 
         popUpPesquisa.setFocusable(false);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("cardapio");
         setBackground(new java.awt.Color(234, 168, 0));
         setForeground(new java.awt.Color(255, 102, 51));
@@ -155,7 +155,6 @@ public class Cardapio extends javax.swing.JFrame {
         scrollCardapio.setBounds(40, 330, 280, 280);
 
         btnAdicionar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnAdicionar.setForeground(new java.awt.Color(255, 255, 255));
         btnAdicionar.setText("Adicionar");
         btnAdicionar.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
         btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -523,7 +522,6 @@ public class Cardapio extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jPanel1);
 
         btnGerarPedido.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnGerarPedido.setForeground(new java.awt.Color(255, 255, 255));
         btnGerarPedido.setText(" Gerar Pedido");
         btnGerarPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnGerarPedido.addActionListener(new java.awt.event.ActionListener() {
@@ -533,7 +531,6 @@ public class Cardapio extends javax.swing.JFrame {
         });
 
         btnVoltar.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        btnVoltar.setForeground(new java.awt.Color(255, 255, 255));
         btnVoltar.setText("Voltar");
         btnVoltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -575,9 +572,7 @@ public class Cardapio extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        Logado logado = new Logado(this.cliente);
-        logado.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
     private void btnGerarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarPedidoActionPerformed
@@ -602,7 +597,7 @@ public class Cardapio extends javax.swing.JFrame {
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         // TODO add your handling code here:
-        c.adicionarItemAoPedido();
+        c.addItemAoPedido();
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void imgPizza11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imgPizza11MouseClicked
@@ -671,7 +666,7 @@ public class Cardapio extends javax.swing.JFrame {
     }//GEN-LAST:event_imgBebida15MouseClicked
 
     private void barraPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_barraPesquisaKeyReleased
-        c.pesquisa(mod);
+        c.pesquisar(mod);
     }//GEN-LAST:event_barraPesquisaKeyReleased
 
     private void listaPesquisaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPesquisaMouseClicked

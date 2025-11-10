@@ -51,7 +51,7 @@ public class Logado extends javax.swing.JFrame {
         btnPerfil = new javax.swing.JButton();
         btnSair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblUsuario.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         lblUsuario.setText("Usuario");
@@ -137,21 +137,18 @@ public class Logado extends javax.swing.JFrame {
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
         // TODO add your handling code here:
         Cardapio menu = new Cardapio(cliente);
-        this.setVisible(false);
         menu.setVisible(true);
     }//GEN-LAST:event_btnMenuActionPerformed
 
     private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
         // TODO add your handling code here:
         Pedidos p = new Pedidos(cliente);
-        this.setVisible(false);
         p.setVisible(true);
     }//GEN-LAST:event_btnPedidosActionPerformed
 
     private void btnPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerfilActionPerformed
         // TODO add your handling code here:
         Perfil perfil = new Perfil(cliente);
-        this.setVisible(false);
         perfil.setVisible(true);
         
     }//GEN-LAST:event_btnPerfilActionPerformed

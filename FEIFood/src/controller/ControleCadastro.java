@@ -7,39 +7,62 @@ package controller;
 import dao.Conexao;
 import dao.ClienteDAO;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import model.Cliente;
 import view.Cadastro;
 
 /**
- *
+ * Controla a lógica da tela de cadastro de novos clientes.
  * @author Micro
  */
 public class ControleCadastro {
-    private Cadastro tela3;
+    private Cadastro view;
     
-    public ControleCadastro(Cadastro tela3){
-        this.tela3 = tela3;
+    /**
+     * Construtor que liga o controller à sua view.
+     * @param view A instância da tela de Cadastro.
+     */
+    public ControleCadastro(Cadastro view){
+        this.view = view;
     }
     
+    /**
+     * Salva um novo cliente no banco de dados.
+     */
     public void salvarCliente(){
-        String nome = tela3.getTxtNome().getText();
-        String usuario = tela3.getTxtUsuario().getText();
-        String senha = tela3.getTxtSenha().getText();
+        String nome = view.getTxtNome().getText();
+        String usuario = view.getTxtUsuario().getText();
+        String senha = view.getTxtSenha().getText();
+        
+        //Usa o construtor de cliente novo (ID 0)
         Cliente cliente = new Cliente(nome, usuario, senha);
         
+        Connection conn = null;
         Conexao conexao = new Conexao();
         try{
-            Connection conn = conexao.getConnection();
-            ClienteDAO dao = new  ClienteDAO(conn);
+            conn = conexao.getConnection();
+            ClienteDAO dao = new ClienteDAO(conn);
             dao.inserir(cliente);
-            JOptionPane.showMessageDialog(tela3,"Usuário Cadastrado!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(view,"Usuário Cadastrado!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+            view.dispose(); //Fecha a tela de cadastro após o sucesso
+            
         } catch(SQLException ex){
-            JOptionPane.showMessageDialog(tela3, "Usuário não Cadastrado!", "Erro", JOptionPane.ERROR_MESSAGE);
+            //Verifica se é um erro de "usuário duplicado"
+            if (ex.getSQLState().equals("23505")) { //Código de violação de constraint UNIQUE
+                JOptionPane.showMessageDialog(view, "Este nome de usuário já existe!", "Erro", JOptionPane.ERROR_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(view, "Usuário não Cadastrado! Erro de BD.", "Erro", JOptionPane.ERROR_MESSAGE);
+                ex.printStackTrace();
+            }
+        } finally{
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    System.err.println("Erro ao fechar conexão: " + e.getMessage());
+                }
+            }
         }
     }
-    
-    
 }

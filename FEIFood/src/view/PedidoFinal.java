@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JToggleButton;
-import model.Alimento;
+import model.Comida;
 import model.Cliente;
 import model.Pedido;
 
@@ -66,7 +66,7 @@ public class PedidoFinal extends javax.swing.JFrame {
         botaoAvaliar5 = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnPedidos.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         btnPedidos.setText("Pedidos");
@@ -273,7 +273,7 @@ public class PedidoFinal extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         // TODO add your handling code here:
-        c.excluirPedidoAtual();
+        c.excluirPedido();
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void botaoAvaliar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAvaliar2ActionPerformed

@@ -1,34 +1,31 @@
-                                                                    /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 /**
+ * Superclasse abstrata para todos os itens vendáveis (Comida e Bebida).
+ * Define as propriedades comuns que vêm da tabela 'tbalimentos'.
  *
- * @author Micro
  */
-public class Alimento {
+public abstract class Alimento {
     
     private int id;
     private String nome;
     private String descricao;
-    private String sabor;
     private double preco;
-    private boolean zerosugar;
-    private boolean veggie;
-    private boolean alcool;
-    
 
-    public Alimento(int id, String nome, String descricao, double preco, boolean zerosugar, boolean veggie, boolean alcool) {
+    /**
+     * Construtor principal para um Alimento.
+     * @param id O ID do item no banco.
+     * @param nome O nome do item.
+     * @param descricao A descrição do item.
+     * @param preco O preço base (coluna 'preco' no BD).
+     */
+    public Alimento(int id, String nome, String descricao, double preco) {
         this.id = id;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
-        this.zerosugar = zerosugar;
-        this.veggie = veggie;
-        this.alcool = alcool;
     }
+
 
     public int getId() {
         return id;
@@ -45,22 +42,4 @@ public class Alimento {
     public double getPreco() {
         return preco;
     }
-
-    public String getSabor() {
-        return sabor;
-    }
-
-    public boolean isZerosugar() {
-        return zerosugar;
-    }
-
-    public boolean isVeggie() {
-        return veggie;
-    }
-
-    public boolean isAlcool() {
-        return alcool;
-    }
-    
-    
 }

@@ -11,40 +11,66 @@ import view.Login;
 import view.Logado;
 
 /**
- * Controla a lógica da tela de login.
+ * Controller para a tela de Login.
+ * Gerecia a autenticação do utilizador.
  */
 public class ControleLogin {
 
-    private Login tela1; // A tela de login associada
+    private Login view;
 
+    /**
+     * @param view A tela de Login (JFrame) que este controller irá gerir.
+     */
     public ControleLogin(Login view) {
-        this.tela1 = view;
+        this.view = view;
     }
     
-    
+    /**
+     * Tenta autenticar o utilizador.
+     * Chamado pelo botão "ENTRAR".
+     */
     public void loginUsuario() {
-        Cliente usuario = new Cliente(null, tela1.getTxtUsuario().getText(),tela1.getTxtSenha().getText());
+        //Cria um cliente 'parcial' apenas com os dados de login
+        Cliente usuario = new Cliente(0, null, view.getTxtUsuario().getText(), view.getTxtSenha().getText());
+        
         Conexao conexao = new Conexao();
+        Connection conn = null;
         try {
-            Connection conn = conexao.getConnection();
+            conn = conexao.getConnection();
             ClienteDAO dao = new ClienteDAO(conn);
             ResultSet res = dao.consultar(usuario);
-            if(res.next()){
-                JOptionPane.showMessageDialog(tela1, "Login Feito", "Aviso",
+            
+            if(res.next()){ //Se o DAO encontrou o utilizador
+                JOptionPane.showMessageDialog(view, "Login Feito", "Aviso",
                                               JOptionPane.INFORMATION_MESSAGE);
+                //Busca os dados completos do utilizador no ResultSet
+                int id = res.getInt("id");
                 String nome = res.getString("nome");
                 String username = res.getString("username");
                 String senha = res.getString("senha");
-                int id = res.getInt("id");
-                Logado tela2 = new Logado(new Cliente(id, nome, username, senha));
-                tela2.setVisible(true);
-                tela1.setVisible(false);
+                
+                //Cria o objeto Cliente completo (o "crachá")
+                Cliente clienteLogado = new Cliente(id, nome, username, senha);
+                
+                //Navega para a tela Logado
+                Logado telaLogado = new Logado(clienteLogado);
+                telaLogado.setVisible(true);
+                view.dispose(); //Fecha a tela de login
+                
             }else{
-                JOptionPane.showMessageDialog(tela1, "login nao efetuado", "erro", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(view, "Utilizador ou senha inválidos", "Erro", JOptionPane.ERROR_MESSAGE);
             }
         }catch(SQLException e){
-            JOptionPane.showMessageDialog(tela1,"Erro de Conexao","Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(view,"Erro de Conexão com o Banco.","Erro", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
+        }finally {
+            if (conn != null) { //Garante que a conexão seja fechada
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    System.err.println("Erro ao fechar conexão: " + e.getMessage());
+                }
+            }
         }
     }
 }

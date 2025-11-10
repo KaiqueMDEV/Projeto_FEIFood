@@ -1,8 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
+
 import dao.AlimentoDAO;
 import dao.Conexao;
 import java.sql.Connection;
@@ -12,62 +9,82 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
 import model.Alimento;
+import model.Bebida;
 import model.Cliente;
+import model.Comida;
 import model.Pedido;
 import view.Cardapio;
 import view.PedidoFinal;
 
 /**
- *
+ * Controla a lógica da tela principal do Cardápio.
  * @author Micro
  */
 public class ControleMenu {
     
-    private Cardapio view; //A tela que este cérebro controla
-    private Cliente cliente; //O usuário que está logado
-    private Pedido pedidoAtual;         //O carrinho de compras
-    private Alimento alimentoEmDestaque;
+    private Cardapio view;
+    private Cliente cliente;
+    private Pedido pedidoAtual;
+    private Alimento itemEmDestaque;
 
-    // Construtor: Recebe a tela e o usuário logado
+    /**
+     * Construtor que liga o controller à view e ao cliente.
+     * @param view A instância da tela Cardapio.
+     * @param cliente O cliente logado.
+     */
     public ControleMenu(Cardapio view, Cliente cliente) {
         this.view = view;
         this.cliente = cliente;
-        this.pedidoAtual = new Pedido(this.cliente);
+        this.pedidoAtual = new Pedido(this.cliente); //Cria um novo carrinho vazio
     }
     
-    
     /**
-     * O método principal: busca dados no banco e atualiza a tela
-     * @param nomeDoLanche O nome do lanche que o usuário clicou (ex: "X-Burguer")
+     * Busca os detalhes de um alimento no banco e atualiza o painel de destaque.
+     * @param nomeAlimento O nome do item que o utilizador clicou.
      */
-    public void exibirDetalhes(String nomeDoLanche) {
+    public void exibirDetalhes(String nomeAlimento) {
         
         Alimento alimento = null;
+        Connection conn = null;
         try {
             Conexao conexao = new Conexao();
-            Connection conn = conexao.getConnection();
+            conn = conexao.getConnection();
             AlimentoDAO dao = new AlimentoDAO(conn);            
-            // Pede ao DAO para consultar o lanche pelo nome
-            alimento = dao.consultarPorNome(nomeDoLanche);
+            alimento = dao.consultarPorNome(nomeAlimento); //Busca o Alimento (Comida ou Bebida)
             
         } catch (SQLException e) {
-            e.printStackTrace(); //debug
+            e.printStackTrace();
             JOptionPane.showMessageDialog(view, "Erro ao conectar ao banco de dados!\n" + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
-            return; //return em caso de debug
+            return;
+        } finally {
+            if (conn != null) {
+                try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
+            }
         }
+        
         if (alimento != null) {
-            
-            // Atualiza os textos com os dados que vieram do banco
             view.getPainelTituloAlimento().setText(alimento.getNome());
             view.getPainelDescAlimento().setText(alimento.getDescricao());
             view.getPainelPrecoAlimento().setText("R$: " + String.valueOf(alimento.getPreco()));
-            view.getIconeAlcool().setVisible(alimento.isAlcool());
-            view.getIconeZero().setVisible(alimento.isZerosugar());
-            view.getIconeVeggie().setVisible(alimento.isVeggie());
-
-            String caminhoImagem = "";
             
-            caminhoImagem = switch (nomeDoLanche) {
+            //Lógica dos ícones usando instanceof
+            if (alimento instanceof Comida) {
+                Comida comida = (Comida) alimento;
+                view.getIconeVeggie().setVisible(comida.isVeggie());
+                view.getIconeAlcool().setVisible(false);
+                view.getIconeZero().setVisible(false);
+                
+            } else if (alimento instanceof Bebida) {
+                Bebida bebida = (Bebida) alimento;
+                view.getIconeVeggie().setVisible(false);
+                view.getIconeAlcool().setVisible(bebida.getTeor_alcoolico() > 0);
+                view.getIconeZero().setVisible(bebida.isZerosugar());
+            }
+
+            //Lógica de carregar a imagem de destaque local
+            String caminhoImagem = "";
+            caminhoImagem = switch (nomeAlimento) {
+                //(O seu switch case completo com os caminhos das imagens)
                 case "X-Burger" -> "/resources/xburger_destaque.png";
                 case "X-Salada" -> "/resources/xsalada_destaque.png";
                 case "X-Frango" -> "/resources/xfrango_destaque.png";
@@ -90,24 +107,29 @@ public class ControleMenu {
             try {
                 Icon imagemDestaque = new ImageIcon(getClass().getResource(caminhoImagem));
                 view.getPainelDestaqueAlimento().setIcon(imagemDestaque);
-                view.getPainelDestaqueAlimento().setText(""); // Limpa o texto (caso tenha dado erro antes)
+                view.getPainelDestaqueAlimento().setText("");
             } catch (Exception e) {
-                // Se não achar o arquivo de imagem
-                view.getPainelDestaqueAlimento().setIcon(null); // Remove a imagem anterior
+                view.getPainelDestaqueAlimento().setIcon(null);
                 view.getPainelDestaqueAlimento().setText("Imagem não encontrada");
                 System.err.println("Erro ao carregar imagem: " + caminhoImagem);
             }
             
         } else {
-            JOptionPane.showMessageDialog(view, "Alimento '" + nomeDoLanche + "' não encontrado no cadastro.", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(view, "Alimento '" + nomeAlimento + "' não encontrado no cadastro.", "Erro", JOptionPane.ERROR_MESSAGE);
         }
-        this.alimentoEmDestaque = alimento;
-        
+        this.itemEmDestaque = alimento; //Guarda o item na vitrine
     }
-    public void pesquisa(DefaultListModel mod){
-        mod.removeAllElements();
+    
+    /**
+     * Atualiza a lista de pesquisa (JList) com base no que o utilizador digita.
+     * @param mod O DefaultListModel da JList da View.
+     */
+    public void pesquisar(DefaultListModel mod){
+        mod.removeAllElements(); //Limpa resultados anteriores
         
-        if (view.getBarraPesquisa().getText().equals("")){
+        String textoPesquisa = view.getBarraPesquisa().getText();
+        
+        if (textoPesquisa.equals("") || textoPesquisa.equals("Pesquisar...")) {
             view.getPopUpPesquisa().setVisible(false);
         }else{
             view.getPopUpPesquisa().show(view.getBarraPesquisa(), 0, view.getBarraPesquisa().getHeight());
@@ -116,11 +138,10 @@ public class ControleMenu {
                 Conexao conexao = new Conexao();
                 conn = conexao.getConnection();
                 AlimentoDAO dao = new AlimentoDAO(conn); 
-                dao.pesquisarPorNome(view.getBarraPesquisa().getText(), mod);
+                dao.pesquisarPorNome(textoPesquisa, mod);
           
             }catch(Exception e){
                 System.out.println(e.getMessage());
-                
             }finally{
                 if(conn != null){
                     try{
@@ -132,47 +153,30 @@ public class ControleMenu {
             }
         }
     }
-    public void adicionarItemAoPedido() {
-        // Verifica se há um item na vitrine
-        if (this.alimentoEmDestaque != null) {
-            
-            // Adiciona o item ao pedido
-            this.pedidoAtual.adicionarItem(this.alimentoEmDestaque);
-            
-            // Dá um feedback para o usuário
-            String nome = this.alimentoEmDestaque.getNome();
+    
+    /**
+     * Adiciona o item atualmente em destaque ao carrinho (Pedido).
+     */
+    public void addItemAoPedido() {
+        if (this.itemEmDestaque != null) {
+            this.pedidoAtual.addItem(this.itemEmDestaque); //CORRIGIDO (era adicionarItemAoPedido)
+            String nome = this.itemEmDestaque.getNome();
             JOptionPane.showMessageDialog(view, nome + " foi adicionado ao seu pedido!", "Item Adicionado", JOptionPane.INFORMATION_MESSAGE);
-            
         } else {
-            // Se o usuário clicar em "Adicionar" sem ter selecionado um item
             JOptionPane.showMessageDialog(view, "Por favor, clique em um item do cardápio primeiro.", "Erro", JOptionPane.WARNING_MESSAGE);
         }
     }
 
-    public Pedido getPedidoAtual() {
-        return this.pedidoAtual;
-    }
-    
+    /**
+     * Navega para a tela de finalização de pedido.
+     */
     public void finalizarPedido() {
-        
-        // 1. Pega o carrinho de compras atual
-        Pedido pedidoParaFinalizar = this.pedidoAtual; // (Não precisamos do getter, já temos acesso)
-
-        // 2. O Controller toma a decisão lógica
-        if (pedidoParaFinalizar.getItensDoPedido().isEmpty()) {
-            // O Controller diz à View para mostrar o aviso
+        if (this.pedidoAtual.getItens().isEmpty()) { //CORRIGIDO (era getItensDoPedido)
             JOptionPane.showMessageDialog(this.view, "Seu carrinho está vazio!", "Aviso", JOptionPane.WARNING_MESSAGE);
-            // return; // Não continua
-        
         } else {
-            
-            // 3. O Controller controla a navegação
-            PedidoFinal telaFinal = new PedidoFinal(this.cliente, pedidoParaFinalizar);
-    
-            // 4. O Controller abre a nova tela e fecha a antiga
+            PedidoFinal telaFinal = new PedidoFinal(this.cliente, this.pedidoAtual);
             telaFinal.setVisible(true);
-            this.view.setVisible(false);
+            this.view.dispose(); //Navegação corrigida
         }
     }
-    
 }

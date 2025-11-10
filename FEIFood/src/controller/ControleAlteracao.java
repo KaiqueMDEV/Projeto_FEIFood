@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
 import dao.ClienteDAO;
@@ -13,34 +9,56 @@ import java.sql.SQLException;
 import view.Alteracao;
 
 /**
- *
+ * Controla a lógica da tela de alteração de senha.
  * @author Micro
  */
 public class ControleAlteracao {
-    private Alteracao tela6;
+    private Alteracao view;
     private Cliente cliente;
     
-    public ControleAlteracao(Alteracao tela6, Cliente cliente){
-        this.tela6 = tela6;
+    /**
+     * Construtor que liga o controller à sua view e ao cliente.
+     * @param view A instância da tela de Alteracao.
+     * @param cliente O cliente logado que terá a senha alterada.
+     */
+    public ControleAlteracao(Alteracao view, Cliente cliente){
+        this.view = view;
         this.cliente = cliente;
     }
     
-    public void atualizar(){
-       String usuario = cliente.getUsername();
-       String novaSenha = tela6.getTxtSenhaNova().getText();
-       Cliente cliente = new Cliente("",usuario, novaSenha);
+    /**
+     * Atualiza a senha do cliente no banco de dados.
+     */
+    public void atualizarSenha(){
+       String novaSenha = view.getTxtSenhaNova().getText();
+       
+       this.cliente.setSenha(novaSenha); //Atualiza o objeto na memória
+       
        Conexao conexao = new Conexao();
+       Connection conn = null;
        try{
-           Connection conn = conexao.getConnection();
+           conn = conexao.getConnection();
            ClienteDAO dao = new ClienteDAO(conn);
-           dao.atualizar(cliente);
-           JOptionPane.showMessageDialog(tela6,"Senha atualizada",
+           
+           dao.atualizar(this.cliente); //Envia o objeto cliente completo para o DAO
+           
+           JOptionPane.showMessageDialog(view,"Senha atualizada",
                    "Aviso", JOptionPane.INFORMATION_MESSAGE);
+           
+           view.dispose(); //Fecha a tela
+           
        }catch(SQLException e){
-           JOptionPane.showMessageDialog(tela6, "Falha de conexão!", "Erro", JOptionPane.ERROR_MESSAGE);
+           JOptionPane.showMessageDialog(view, "Falha de conexão!", "Erro", JOptionPane.ERROR_MESSAGE);
+           e.printStackTrace();
        }
+       finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    System.err.println("Erro ao fechar conexão: " + e.getMessage());
+                }
+            }
+        }
     }
-    
-    
-    
 }

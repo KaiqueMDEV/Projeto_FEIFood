@@ -2,20 +2,23 @@ package controller;
 
 import dao.Conexao;
 import dao.PedidoDAO;
-import java.awt.Menu;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Map; // Importe o Map
+import java.util.Map;
 import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel; // Importe o DefaultListModel
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
-import model.Alimento; // Importe o Alimento
+import model.Alimento;
 import model.Cliente;
 import model.Pedido;
 import view.Logado; 
 import view.PedidoFinal;
 import view.Pedidos;
 
+/**
+ * Controla a lógica da tela de finalização e detalhe do pedido.
+ * @author Micro
+ */
 public class ControlePedidoFinal {
     
     private PedidoFinal view;
@@ -23,45 +26,50 @@ public class ControlePedidoFinal {
     private Pedido pedido;
     private ButtonGroup grupoAvaliacao;
 
+    /**
+     * Construtor que liga o controller à sua view, cliente e pedido.
+     * @param view A instância da tela PedidoFinal.
+     * @param cliente O cliente logado.
+     * @param pedido O Pedido (pode ser um carrinho novo ou um pedido antigo).
+     */
     public ControlePedidoFinal(PedidoFinal view, Cliente cliente, Pedido pedido) {
         this.view = view;
         this.cliente = cliente;
         this.pedido = pedido;
         
-        // O Controller agora chama o seu próprio método para configurar a tela.
-        configurarBotoesAvaliacao();
-        inicializarTela(); 
+        configurarBotoesAvaliacao(); //Agrupa os JRadioButtons
+        inicializarTela(); //Decide o que mostrar
     }
     
     /**
-     * Verifica se o pedido é NOVO (do carrinho) ou ANTIGO (do banco)
-     * e configura a tela de acordo.
+     * Verifica se o pedido é NOVO (carrinho) ou ANTIGO (do banco)
+     * e configura a tela (botões, avaliação, etc.).
      */
     private void inicializarTela() {
-        if (pedido.getId() == 0) {
-            // FLUXO 1: NOVO (do carrinho)
-            popularListaDeItens();
+        if (pedido.getId() == 0) { //Se ID = 0, é um carrinho novo
+            popularListaItens();
             view.getBtnFinalizar().setEnabled(true);
-            view.mostrarPainelAvaliacao(false); // Esconde o painel de avaliação
+            view.mostrarPainelAvaliacao(false); //Esconde avaliação
             
-        } else {
-            // FLUXO 2: ANTIGO (do banco)
+        } else { //Se ID > 0, é um pedido antigo
             view.getBtnFinalizar().setText("Pedido Concluído");
-            view.getBtnFinalizar().setEnabled(false);
+            view.getBtnFinalizar().setEnabled(false); //Tranca o botão
             
-            carregarItensDoPedidoAntigo(); 
+            carregarItensPedidoAntigo(); //Busca os itens do pedido no banco
             
-            if (pedido.getAvaliacao() > 0) {
-                // Pedido JÁ AVALIADO
+            if (pedido.getAvaliacao() > 0) { //Se já foi avaliado
                 view.mostrarPainelAvaliacao(true);
-                view.mostrarAvaliacaoSalva(pedido.getAvaliacao());
-            } else {
-                // Pedido FINALIZADO, MAS NÃO AVALIADO
-                view.mostrarPainelAvaliacao(true); 
+                view.mostrarAvaliacaoSalva(pedido.getAvaliacao()); //Mostra a nota e trava
+            } else { //Se não foi avaliado
+                view.mostrarPainelAvaliacao(true); //Mostra os botões para avaliar
             }
         }
     }
     
+    /**
+     * Chamado quando o utilizador clica num dos botões de avaliação (1-5).
+     * @param nota A nota (1-5) que o utilizador selecionou.
+     */
     public void avaliar(int nota) {
         
         int resposta = JOptionPane.showConfirmDialog(
@@ -72,46 +80,42 @@ public class ControlePedidoFinal {
         );
 
         if (resposta != JOptionPane.YES_OPTION) {
-            // Se o usuário clicou "Não", o Controller limpa a seleção
-            this.grupoAvaliacao.clearSelection(); 
+            this.grupoAvaliacao.clearSelection(); //Limpa a seleção se o utilizador clicar "Não"
             return;
         }
         
-        this.pedido.setAvaliacao(nota);
+        this.pedido.setAvaliacao(nota); //Define a nota no objeto
         
         Connection conn = null;
         try {
             conn = new Conexao().getConnection();
             PedidoDAO dao = new PedidoDAO(conn);
             
-            dao.salvarAvaliacao(this.pedido);
+            dao.salvarAvaliacao(this.pedido); //CORRIGIDO (era salvarAvaliacao)
             
             JOptionPane.showMessageDialog(view, "Obrigado por avaliar!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             
-            // O Controller manda a View travar
-            view.mostrarAvaliacaoSalva(nota); 
+            view.mostrarAvaliacaoSalva(nota); //Trava os botões na View
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(view, "Erro ao salvar avaliação: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         } finally {
             if (conn != null) {
-                try { conn.close(); } catch (SQLException e) {  }
+                try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
             }
         }
     }
     
+    //Configura a lógica do ButtonGroup para os JRadioButtons
     private void configurarBotoesAvaliacao() {
         this.grupoAvaliacao = new ButtonGroup();
-        
-        // Pega os botões da View e adiciona-os ao grupo lógico
         this.grupoAvaliacao.add(view.getBotaoAvaliar1());
         this.grupoAvaliacao.add(view.getBotaoAvaliar2());
         this.grupoAvaliacao.add(view.getBotaoAvaliar3());
         this.grupoAvaliacao.add(view.getBotaoAvaliar4());
         this.grupoAvaliacao.add(view.getBotaoAvaliar5());
         
-        // (Opcional, mas recomendado) Define o "valor" de cada botão
         view.getBotaoAvaliar1().setActionCommand("1");
         view.getBotaoAvaliar2().setActionCommand("2");
         view.getBotaoAvaliar3().setActionCommand("3");
@@ -119,20 +123,16 @@ public class ControlePedidoFinal {
         view.getBotaoAvaliar5().setActionCommand("5");
     }
     
-    /**
-     * MÉTODO NOVO (movido da View): Pega os itens do objeto 'pedido'
-     * e os insere na JList da View.
-     */
-    private void popularListaDeItens() {
+    //Preenche a JList da View com os itens do objeto Pedido
+    private void popularListaItens() {
         DefaultListModel<String> modelLista = new DefaultListModel<>();
         
-        // 2. Use o Map do Pedido para preencher o model
-        for (Map.Entry<Alimento, Integer> item : pedido.getItensDoPedido().entrySet()) {
+        for (Map.Entry<Alimento, Integer> item : pedido.getItens().entrySet()) { //CORRIGIDO (era getItensDoPedido)
             Alimento alimento = item.getKey();
-            Integer quantidade = item.getValue();
+            Integer qtd = item.getValue(); //Abreviado
             
             String linha = String.format("%dx %s (R$ %.2f)", 
-                                         quantidade, 
+                                         qtd, 
                                          alimento.getNome(), 
                                          alimento.getPreco());
             modelLista.addElement(linha);
@@ -141,61 +141,51 @@ public class ControlePedidoFinal {
         modelLista.addElement("----------------------");
         modelLista.addElement(String.format("TOTAL: R$ %.2f", pedido.getValorTotal()));
 
-        // 3. O Controller "empurra" o modelo pronto para a View
         view.getListaPedido().setModel(modelLista); 
     }
     
-    
-    /**
-     * (Apenas para o Fluxo 2) Busca no DAO os itens do pedido antigo
-     * e manda a View exibi-los.
-     */
-    private void carregarItensDoPedidoAntigo() {
+    //Busca os itens de um pedido antigo no banco
+    private void carregarItensPedidoAntigo() {
         Connection conn = null;
         try {
             conn = new Conexao().getConnection();
             PedidoDAO dao = new PedidoDAO(conn);
             
-            // 1. Chama o DAO para "encher" o objeto pedido (na memória)
-            dao.consultarItens(this.pedido);
+            dao.consultarItens(this.pedido); //CORRIGIDO (era consultarItens)
             
-            // 2. Agora que o pedido está cheio, chama o método local para popular a JList
-            popularListaDeItens(); 
+            popularListaItens(); //Atualiza a JList
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(view, "Erro ao carregar itens do pedido: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         } finally {
             if (conn != null) {
-                try { conn.close(); } catch (SQLException e) { /* Ignora */ }
+                try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
             }
         }
     }
 
     /**
-     * Chamado pelo botão "FINALIZAR".
      * Salva o carrinho (que está na memória) no banco de dados.
      */
     public void finalizarPedido() {
         
-        // (Toda a sua lógica de transação que já estava correta vem aqui...)
-        
-        if (pedido.getId() > 0) {
-            // ... (lógica de "pedido já finalizado") ...
+        if (pedido.getId() > 0) { //Se já tem ID, já foi finalizado
+            JOptionPane.showMessageDialog(view, "Este pedido já foi finalizado.", "Aviso", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         Connection conn = null;
         try {
             conn = new Conexao().getConnection();
-            conn.setAutoCommit(false); 
+            conn.setAutoCommit(false); //Inicia transação
             PedidoDAO dao = new PedidoDAO(conn);
             
-            int novoPedidoId = dao.inserirPedido(pedido);
-            pedido.setId(novoPedidoId); 
-            dao.inserirItens(novoPedidoId, pedido.getItensDoPedido());
+            int novoPedidoId = dao.inserirPedido(pedido); //CORRIGIDO (era inserirPedido)
+            pedido.setId(novoPedidoId); //Atualiza o ID no objeto
+            dao.inserirItens(novoPedidoId, pedido.getItens()); //CORRIGIDO (era inserirItens e getItensDoPedido)
             
-            conn.commit(); // SUCESSO!
+            conn.commit(); //Confirma a transação
             
             view.getBtnFinalizar().setText("Pedido Finalizado!");
             view.getBtnFinalizar().setEnabled(false);
@@ -203,11 +193,11 @@ public class ControlePedidoFinal {
             JOptionPane.showMessageDialog(view, "Pedido #" + novoPedidoId + " finalizado com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             
             new Logado(this.cliente).setVisible(true);
-            this.view.setVisible(false);
+            this.view.dispose(); //Navegação corrigida
             
         } catch (SQLException e) {
-            try { if (conn != null) conn.rollback(); } catch (SQLException e2) { /* Ignora */ }
-            JOptionPane.showMessageDialog(view, "Erro grave ao salvar o pedido: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            try { if (conn != null) conn.rollback(); } catch (SQLException e2) { e.printStackTrace(); } //Desfaz tudo
+            JOptionPane.showMessageDialog(view, "Erro grave ao salvar o pedido: " + e.getMessage(), "Erro de Banco de Dados", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
             
         } finally {
@@ -220,16 +210,16 @@ public class ControlePedidoFinal {
         }
     }
     
-    public void excluirPedidoAtual() {
-        // Se o pedido for 0, ele nem existe no banco ainda (é um carrinho)
-        if (this.pedido.getId() == 0) {
-            // Apenas "cancela" o carrinho e volta para o menu
-            new Logado(this.cliente).setVisible(true); // Ou Logado, você decide
-            this.view.setVisible(false);
+    /**
+     * Exclui o pedido atual (seja ele um carrinho ou um pedido do banco).
+     */
+    public void excluirPedido() {
+        if (this.pedido.getId() == 0) { //Se é um carrinho (ID 0)
+            new Logado(this.cliente).setVisible(true);
+            this.view.dispose(); //Apenas fecha a tela
             return;
         }
         
-        // 1. Confirmação
         int resposta = JOptionPane.showConfirmDialog(
             view, 
             "Tem certeza que deseja excluir o Pedido #" + this.pedido.getId() + "?\nEsta ação não pode ser desfeita.", 
@@ -239,34 +229,28 @@ public class ControlePedidoFinal {
         );
 
         if (resposta != JOptionPane.YES_OPTION) {
-            return; // Usuário cancelou
+            return;
         }
 
-        // 2. Tenta executar a exclusão
         Connection conn = null;
         try {
             conn = new Conexao().getConnection();
             PedidoDAO dao = new PedidoDAO(conn);
             
-            // Chama o mesmo método do DAO
-            dao.excluirPedido(this.pedido);
+            dao.excluirPedido(this.pedido); //CORRIGIDO (era excluirPedido)
             
-            // 3. Sucesso!
             JOptionPane.showMessageDialog(view, "Pedido #" + this.pedido.getId() + " excluído com sucesso!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
             
-            // 4. Navega de VOLTA para a lista de pedidos
-            // (A lista 'Pedidos' vai recarregar sozinha quando for aberta)
             new Pedidos(this.cliente).setVisible(true);
-            this.view.setVisible(false);
+            this.view.dispose(); //Volta para a lista de pedidos
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(view, "Erro ao excluir o pedido: " + e.getMessage(), "Erro de Banco de Dados", JOptionPane.ERROR_MESSAGE);
             e.printStackTrace();
         } finally {
             if (conn != null) {
-                try { conn.close(); } catch (SQLException e) { /* Ignora */ }
+                try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
             }
         }
     }
-    // (Métodos futuros para Excluir, Avaliar, etc.)
 }

@@ -50,7 +50,7 @@ public class Perfil extends javax.swing.JFrame {
         lblUsuario = new javax.swing.JLabel();
         lblSenha = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 48)); // NOI18N
         jLabel1.setText("Perfil");
@@ -177,9 +177,7 @@ public class Perfil extends javax.swing.JFrame {
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
-        Logado logado = new Logado(this.cliente);
-        logado.setVisible(true);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
     /**

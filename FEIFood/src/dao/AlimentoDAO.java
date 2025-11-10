@@ -1,72 +1,82 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.DefaultListModel;
 import model.Alimento;
+import model.Bebida;
+import model.Comida;
 
 /**
- *
- * @author Micro
+ * DAO para a entidade Alimento.
  */
 public class AlimentoDAO {
     private Connection conn;
 
+    /**
+     * Construtor que recebe a conexão ativa.
+     * @param conn A conexão SQL.
+     */
     public AlimentoDAO(Connection conn) {
         this.conn = conn;   
     }
     
     /**
-     * Busca um alimento no banco de dados pelo nome.
-     * @param nomeDoLanche O nome exato do lanche (ex: "X-Burguer")
-     * @return um objeto Alimento preenchido, ou null se não encontrar
-     * @throws SQLException 
+     * Consulta um alimento pelo nome exato.
+     * @param nomeDoLanche O nome exato do produto.
+     * @return Um objeto Alimento (Comida ou Bebida) ou null.
+     * @throws SQLException
      */
     public Alimento consultarPorNome(String nomeDoLanche) throws SQLException {
         
-        //**IMPORTANTE**: Verifique se o nome da sua tabela e colunas estão corretos!
-        String sql = "SELECT * FROM tbalimentos WHERE nome = ?";
+        String sql = "SELECT * FROM tbalimentos WHERE nome = ?"; //Usa tbalimentos
+        
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1, nomeDoLanche); //Substitui o "?" pelo nome   
-        ResultSet resultado = statement.executeQuery(); // Executa a busca        
+        statement.setString(1, nomeDoLanche); 
+        ResultSet resultado = statement.executeQuery();      
         Alimento alimento = null;
-        //Se encontrou algo no banco (resultado.next() é true)
+        
         if (resultado.next()) {
+            
             int id = resultado.getInt("id");
             String nome = resultado.getString("nome");
             String descricao = resultado.getString("descricao");
-            double preco = resultado.getDouble("preco");
-            boolean zerosugar = resultado.getBoolean("zero_sugar");
-            boolean veggie = resultado.getBoolean("veggie");
-            boolean alcool;
-            double teor_alcoolico = resultado.getDouble("teor_alcoolico");
-            if (teor_alcoolico > 0){
-                alcool = true;
-            }else{
-                alcool = false;
+            double preco = resultado.getDouble("preco"); //Usa a coluna 'preco'
+            String tipo = resultado.getString("tipo_alimento");
+            
+            //Lógica da Fábrica
+            if ("COMIDA".equals(tipo)) {
+                boolean veggie = resultado.getBoolean("veggie");
+                alimento = new Comida(id, nome, descricao, preco, veggie);
+            
+            } else if ("BEBIDA".equals(tipo)) {
+                boolean zerosugar = resultado.getBoolean("zero_sugar");
+                double teor_alcoolico = resultado.getDouble("teor_alcoolico");
+                alimento = new Bebida(id, nome, descricao, preco, zerosugar, teor_alcoolico);
             }
-            alimento = new Alimento(id, nome, descricao, preco, zerosugar, veggie, alcool);
         }
         
-        conn.close();
         return alimento;
     }
-        public void pesquisarPorNome(String pesquisaLanche, DefaultListModel mod) throws SQLException {
         
-        String sql = "SELECT nome FROM tbalimentos WHERE nome ILIKE ?";
+    /**
+     * Busca alimentos para a barra de pesquisa (com 'LIKE').
+     * @param pesquisaLanche O texto inicial digitado pelo utilizador.
+     * @param mod O ListModel da JList (View) a ser preenchido.
+     * @throws SQLException
+     */
+    public void pesquisarPorNome(String pesquisaLanche, DefaultListModel mod) throws SQLException {
+        
+        String sql = "SELECT nome FROM tbalimentos WHERE nome ILIKE ?"; //ILIKE ignora maiúsculas
         
         PreparedStatement statement = conn.prepareStatement(sql);  
-        statement.setString(1, pesquisaLanche + "%");
-        ResultSet resultado = statement.executeQuery(); // Executa a busca   
+        statement.setString(1, pesquisaLanche + "%"); //O % é o wildcard do LIKE
+        ResultSet resultado = statement.executeQuery(); 
         
         while (resultado.next()){
             mod.addElement(resultado.getString("nome"));
         }
     }
 }
-

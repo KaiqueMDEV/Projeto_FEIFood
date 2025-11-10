@@ -43,7 +43,7 @@ public class Alteracao extends javax.swing.JFrame {
         btnSalvar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblNome.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         lblNome.setText("Nome");
@@ -114,7 +114,7 @@ public class Alteracao extends javax.swing.JFrame {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        c.atualizar();
+        c.atualizarSenha();
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed

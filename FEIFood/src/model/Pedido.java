@@ -1,70 +1,73 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
-import java.sql.Timestamp;
+
 /**
- *
+ * Representa um Pedido (carrinho de compras).
+ * Guarda o cliente e um Mapa de Alimentos com as suas quantidades.
  * @author Micro
  */
 public class Pedido {
 
-    private Cliente cliente; //dono do pedido
+    private Cliente cliente;
+    private Map<Alimento, Integer> itens; //Mapeia um Alimento à sua quantidade
     
-    //{Chave=Alimento, Valor=Quantidade}
-    private Map<Alimento, Integer> itensDoPedido; 
-    
-    // (Também guardamos os dados da tabela 'pedido' do seu SQL)
     private int id;
     private double valorTotal;
-    private Timestamp dataHora; // NOVO!
+    private Timestamp dataHora;
     private int avaliacao;
-    // ... (outros campos como data, avaliacao, etc. podem vir depois)
 
     /**
-     * Construtor: Cria um novo carrinho de compras vazio para um cliente.
+     * Construtor para um NOVO carrinho de compras (em memória).
      * @param cliente O cliente que está logado.
      */
     public Pedido(Cliente cliente) {
         this.cliente = cliente;
-        this.itensDoPedido = new HashMap<>(); // Cria o mapa vazio
+        this.itens = new HashMap<>(); //Usa o nome abreviado 'itens'
         this.valorTotal = 0.0;
         this.dataHora = null;
-        this.avaliacao = 0;
+        this.avaliacao = 0; //0 = pendente
     }
+    
+    /**
+     * Construtor para carregar um PEDIDO ANTIGO (do banco).
+     * @param id O ID do pedido.
+     * @param dataHora A data/hora da compra.
+     * @param valorTotal O valor total já calculado.
+     * @param avaliacao A nota (0-5) dada pelo cliente.
+     * @param cliente O cliente dono do pedido.
+     */
     public Pedido(int id, Timestamp dataHora, double valorTotal, int avaliacao, Cliente cliente) {
         this.id = id;
         this.dataHora = dataHora;
         this.valorTotal = valorTotal;
         this.avaliacao = avaliacao;
         this.cliente = cliente;
-        this.itensDoPedido = new HashMap<>(); //O carrinho começa vazio
+        this.itens = new HashMap<>(); //Usa o nome abreviado 'itens'
     }
     
     /**
      * Adiciona um item ao carrinho (Map).
-     * Se o item não existe, adiciona com quantidade 1.
-     * Se o item JÁ existe, apenas incrementa a quantidade.
-     * @param alimento O Alimento a ser adicionado.
+     * Se o item já existe, apenas incrementa a quantidade (qtd).
+     * Calcula o imposto se o item for uma Bebida.
+     * @param alimento O Alimento (Comida ou Bebida) a ser adicionado.
      */
-    public void adicionarItem(Alimento alimento) {
-        // Usa o 'getOrDefault' para pegar a qtd atual (ou 0 se for novo)
-        int quantidadeAtual = this.itensDoPedido.getOrDefault(alimento, 0);
+    public void addItem(Alimento alimento) {
+        int qtdAtual = this.itens.getOrDefault(alimento, 0); //qtd
+        this.itens.put(alimento, qtdAtual + 1);
         
-        // Coloca o alimento no mapa com a quantidade + 1
-        this.itensDoPedido.put(alimento, quantidadeAtual + 1);
+        double precoBase = alimento.getPreco();
+        double precoFinal = precoBase;
         
-        // Atualiza o valor total (isto é uma lógica simples, podemos melhorar depois)
-        this.valorTotal += alimento.getPreco();
+        //Lógica de Imposto
+        if (alimento instanceof Bebida) {
+            Bebida bebida = (Bebida) alimento;
+            precoFinal += bebida.calcularImposto(precoBase); //Calcula imposto
+        }
         
-        // (Debug) Mostra no console o que está no carrinho
-        System.out.println("Item adicionado: " + alimento.getNome());
-        System.out.println("Itens no carrinho: " + this.itensDoPedido.size());
-        System.out.println("Valor total: " + this.valorTotal);
+        this.valorTotal += precoFinal;
     }
     
     // --- Getters e Setters ---
@@ -73,13 +76,18 @@ public class Pedido {
         return cliente;
     }
 
-    public Map<Alimento, Integer> getItensDoPedido() {
-        return itensDoPedido;
+    /**
+     * Retorna o mapa de itens do pedido.
+     * @return Um Map onde a Chave é o Alimento e o Valor é a Quantidade (Integer).
+     */
+    public Map<Alimento, Integer> getItens() {
+        return itens;
     }
 
     public double getValorTotal() {
         return valorTotal;
     }
+    
     public int getId() {
         return id;
     }
@@ -91,12 +99,20 @@ public class Pedido {
     public int getAvaliacao() {
         return avaliacao;
     }
-    
+
+    /**
+     * Define o ID deste pedido (usado após salvar no banco).
+     * @param id O novo ID vindo do banco.
+     */
     public void setId(int id) {
         this.id = id;
     }
+
+    /**
+     * Define a nota da avaliação para este pedido.
+     * @param avaliacao A nota de 1 a 5.
+     */
     public void setAvaliacao(int avaliacao) {
         this.avaliacao = avaliacao;
     }
-    
 }

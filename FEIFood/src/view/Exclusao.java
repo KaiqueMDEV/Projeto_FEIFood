@@ -37,12 +37,15 @@ public class Exclusao extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBox1 = new javax.swing.JComboBox<>();
         lblNome = new javax.swing.JLabel();
         lbl11 = new javax.swing.JLabel();
         btnSim = new javax.swing.JButton();
         btnNao = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lblNome.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         lblNome.setText("Nome");
@@ -141,6 +144,7 @@ public class Exclusao extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNao;
     private javax.swing.JButton btnSim;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel lbl11;
     private javax.swing.JLabel lblNome;
     // End of variables declaration//GEN-END:variables

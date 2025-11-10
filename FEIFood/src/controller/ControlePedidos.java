@@ -19,21 +19,28 @@ import view.PedidoFinal;
 import view.Pedidos;
 
 /**
- *
+ * Controla a lógica da tela de histórico de Pedidos.
  * @author Micro
  */
 public class ControlePedidos {
     private Pedidos view;
     private Cliente cliente;
-    private List<Pedido> pedidosCarregados; // Guarda a lista de pedidos
+    private List<Pedido> listaPedidos;
 
+    /**
+     * Construtor que liga o controller à sua view e ao cliente.
+     * @param view A instância da tela Pedidos.
+     * @param cliente O cliente logado.
+     */
     public ControlePedidos(Pedidos view, Cliente cliente) {
         this.view = view;
         this.cliente = cliente;
+        
+        carregarPedidos(); //Carrega os pedidos assim que a tela é criada
     }
     
     /**
-     * Chamado pelo construtor da View para encher a JList
+     * Busca o histórico de pedidos no banco e preenche a JList.
      */
     public void carregarPedidos() {
         DefaultListModel<String> modelLista = new DefaultListModel<>();
@@ -43,42 +50,36 @@ public class ControlePedidos {
             conn = new Conexao().getConnection();
             PedidoDAO dao = new PedidoDAO(conn);
             
-            // 1. Busca os pedidos no banco
-            this.pedidosCarregados = dao.consultarPedidosPorCliente(this.cliente);
+            this.listaPedidos = dao.consultarPedidosPorCliente(this.cliente); //CORRIGIDO (era consultarPedidosPorCliente)
             
-            // 2. Formata cada pedido para uma string bonita
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy 'às' HH:mm");
             
-            if (pedidosCarregados.isEmpty()) {
+            if (listaPedidos.isEmpty()) {
                 modelLista.addElement("Você ainda não fez nenhum pedido.");
             } else {
-                for (Pedido p : pedidosCarregados) {
-                String dataFormatada = sdf.format(p.getDataHora());
-                
-                // --- O SEU CÓDIGO (QUE ESTÁ PERFEITO) ---
-                String textoAvaliacao; 
-                int nota = p.getAvaliacao(); 
-                
-                if (nota > 0) {
-                    String estrelas = "★".repeat(nota); 
-                    textoAvaliacao = "| " + estrelas;
-                } else {
-                    textoAvaliacao = "| (Pendente)";
-                }
-                // --- FIM DO SEU CÓDIGO ---
+                for (Pedido p : listaPedidos) {
+                    String dataFormatada = sdf.format(p.getDataHora());
+                    
+                    String textoAvaliacao; 
+                    int nota = p.getAvaliacao(); 
+                    
+                    if (nota > 0) {
+                        String estrelas = "★".repeat(nota); 
+                        textoAvaliacao = "| " + estrelas;
+                    } else {
+                        textoAvaliacao = "| (Pendente)";
+                    }
 
-                // --- A LINHA FINAL QUE USA A VARIÁVEL ---
-                String linha = String.format("Pedido #%d | %s | R$ %.2f %s",
-                                             p.getId(),
-                                             dataFormatada,
-                                             p.getValorTotal(),
-                                             textoAvaliacao); // <-- E é usada aqui!
+                    String linha = String.format("Pedido #%d | %s | R$ %.2f %s",
+                                                 p.getId(),
+                                                 dataFormatada,
+                                                 p.getValorTotal(),
+                                                 textoAvaliacao);
                 
-                modelLista.addElement(linha);
-            }
+                    modelLista.addElement(linha);
+                }
             }
             
-            // 3. Define o modelo na JList da View
             view.getjList1().setModel(modelLista);
             
         } catch (SQLException e) {
@@ -86,38 +87,32 @@ public class ControlePedidos {
             JOptionPane.showMessageDialog(view, "Erro ao buscar histórico de pedidos.", "Erro", JOptionPane.ERROR_MESSAGE);
         } finally {
             if (conn != null) {
-                try { conn.close(); } catch (SQLException e) { /* Ignora */ }
+                try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
             }
         }
     }
     
     /**
      * Chamado pelo clique duplo na JList.
-     * @param selectedIndex O índice do item que o usuário clicou.
+     * @param selectedIndex O índice do item que o utilizador clicou.
      */
     public void abrirPedido(int selectedIndex) {
-        // Se a lista estiver vazia, não faz nada
-        if (pedidosCarregados == null || pedidosCarregados.isEmpty()) {
+        if (listaPedidos == null || listaPedidos.isEmpty() || selectedIndex < 0) {
             return; 
         }
         
-        // 1. Pega o objeto Pedido correspondente ao índice
-        Pedido pedidoSelecionado = this.pedidosCarregados.get(selectedIndex);
+        Pedido pedidoSelecionado = this.listaPedidos.get(selectedIndex);
         
-        // 2. Abre a tela PedidoFinal (reutilizando o construtor que já fizemos!)
-        // A tela PedidoFinal agora será responsável por carregar os itens deste pedido.
         PedidoFinal telaFinal = new PedidoFinal(this.cliente, pedidoSelecionado);
         
-        // 3. Controla a navegação
         telaFinal.setVisible(true);
-        this.view.setVisible(false);
+        this.view.dispose();
     }
     
-    // (Lógica para o botão Menu)
-    public void voltarMenu() {
-        Logado logado = new Logado(this.cliente);
-        logado.setVisible(true);
-        this.view.setVisible(false);
+    /**
+     * Fecha a tela de Pedidos
+     */
+    public void voltarParaLogado() {
+        this.view.dispose();
     }
-   
 }
