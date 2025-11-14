@@ -47,6 +47,7 @@ public class ControleCadastro {
             JOptionPane.showMessageDialog(view,"Usuário Cadastrado!", "Aviso", JOptionPane.INFORMATION_MESSAGE);
             view.dispose(); //Fecha a tela de cadastro após o sucesso
             
+            
         } catch(SQLException ex){
             //Verifica se é um erro de "usuário duplicado"
             if (ex.getSQLState().equals("23505")) { //Código de violação de constraint UNIQUE
