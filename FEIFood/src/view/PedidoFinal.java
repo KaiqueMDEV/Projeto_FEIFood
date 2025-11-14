@@ -301,9 +301,7 @@ public class PedidoFinal extends javax.swing.JFrame {
         c.avaliar(1);
     }//GEN-LAST:event_botaoAvaliar1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

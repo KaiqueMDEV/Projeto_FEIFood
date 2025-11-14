@@ -116,9 +116,7 @@ public class Exclusao extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_btnNaoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
 //    public static void main(String args[]) {
 //        /* Set the Nimbus look and feel */
 //        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
